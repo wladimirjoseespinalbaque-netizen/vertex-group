@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Doña Mary | Ejemplo</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .hero-restaurante {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            background: radial-gradient(ellipse at center top, #2a0e1a 0%, #0a0a0f 70%);
+        }
+
+        .hero-restaurante h1 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 58px;
+            font-weight: 700;
+            font-style: italic;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #e8b4b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-restaurante p {
+            font-size: 18px;
+            color: var(--gris);
+            margin-bottom: 40px;
+            font-family: Georgia, serif;
+            font-style: italic;
+        }
+
+        .hero-restaurante .boton {
+            background: linear-gradient(135deg, #c98a95 0%, #8b3a52 100%);
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(201, 138, 149, 0.3);
+        }
+
+        .hero-restaurante .boton:hover {
+            box-shadow: 0 10px 40px rgba(201, 138, 149, 0.5);
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            color: #e8b4b8;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .logo-restaurante {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .logo-restaurante .inicial {
+            color: #e8b4b8;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .logo-restaurante .nombre {
+            color: #c98a95;
+            font-weight: 400;
+        }
+
+        #menu h2,
+        #nosotros h2,
+        #contacto h2 {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        #menu h2::after,
+        #nosotros h2::after,
+        #contacto h2::after {
+            background: linear-gradient(90deg, #c98a95, transparent);
+        }
+
+        .menu-item h3 {
+            font-family: Georgia, serif;
+            font-weight: 600;
+        }
+
+        .menu-item .estado.activo {
+            background-color: rgba(201, 138, 149, 0.15);
+            color: #e8b4b8;
+            border: 1px solid #c98a95;
+        }
+
+        .menu-item:hover {
+            border-color: rgba(201, 138, 149, 0.5) !important;
+            box-shadow: 0 20px 60px rgba(201, 138, 149, 0.15) !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-restaurante h1 {
+                font-size: 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-restaurante">
+            <span class="inicial">D</span>oña <span class="nombre">Mary</span>
+        </div>
+        <nav>
+            <a href="#menu">Menú</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero-restaurante">
+        <h1>Cocina con amor, sabor de hogar</h1>
+        <p>Tradición guayaquileña servida en cada plato. Reserva tu mesa hoy.</p>
+        <a href="https://wa.me/593XXXXXXXXX" class="boton">Reservar por WhatsApp</a>
+        <a href="../../vertex-tech/index.html" class="volver">← Volver a Vertex Tech</a>
+    </section>
+
+    <section id="menu">
+        <h2>Menú</h2>
+        <div class="ramas-grid">
+
+            <div class="rama menu-item">
+                <h3>Encebollado</h3>
+                <p>Pescado fresco con yuca, cebolla y limón. El desayuno favorito de Guayaquil.</p>
+                <span class="estado activo">$4.50</span>
+            </div>
+
+            <div class="rama menu-item">
+                <h3>Seco de Pollo</h3>
+                <p>Pollo tierno con arroz, menestra y maduro frito. Con sabor a casa.</p>
+                <span class="estado activo">$5.00</span>
+            </div>
+
+            <div class="rama menu-item">
+                <h3>Bolón de Queso</h3>
+                <p>Plátano verde con queso fresco, acompañado de café pasado.</p>
+                <span class="estado activo">$3.50</span>
+            </div>
+
+            <div class="rama menu-item">
+                <h3>Ceviche de Camarón</h3>
+                <p>Camarones frescos, limón, tomate y cilantro. Servido con chifles.</p>
+                <span class="estado activo">$6.00</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="nosotros">
+        <h2>Nosotros</h2>
+        <p style="text-align:center; color:var(--gris); max-width:700px; margin:0 auto; font-family: Georgia, serif; font-style: italic;">
+            Doña Mary lleva más de 20 años cocinando con amor para las familias de Guayaquil.
+            Cada plato es preparado con ingredientes frescos y recetas tradicionales que pasan de generación en generación.
+        </p>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p style="text-align:center; color:var(--gris); margin-bottom:30px;">
+            Av. 9 de Octubre 456, Guayaquil<br>
+            Lunes a Domingo, 8am - 10pm
+        </p>
+        <div style="text-align:center;">
+            <a href="https://wa.me/593XXXXXXXXX" class="boton">Reservar por WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Restaurante Doña Mary - Ejemplo creado por Vertex Tech</p>
+    </footer>
+
+</body>
+</html>

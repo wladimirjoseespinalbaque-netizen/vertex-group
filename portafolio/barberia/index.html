@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería El Rey | Ejemplo</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .hero-barberia {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            background: radial-gradient(ellipse at center top, #1a0f0a 0%, #0a0a0f 70%);
+        }
+        .hero-barberia h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-barberia p {
+            font-size: 18px;
+            color: var(--gris);
+            margin-bottom: 40px;
+        }
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--dorado);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span class="v">B</span>ARBERÍA <span class="group">EL REY</span>
+        </div>
+        <nav>
+            <a href="#servicios">Servicios</a>
+            <a href="#precios">Precios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero-barberia">
+        <h1>Cortes clásicos, estilo moderno</h1>
+        <p>La mejor barbería de Guayaquil. Reserva tu cita hoy.</p>
+        <a href="https://wa.me/593XXXXXXXXX" class="boton">Reservar por WhatsApp</a>
+        <a href="../../vertex-tech/index.html" class="volver">← Volver a Vertex Tech</a>
+    </section>
+
+    <section id="servicios">
+        <h2>Servicios</h2>
+        <div class="ramas-grid">
+            <div class="rama">
+                <h3>Corte de cabello</h3>
+                <p>Corte personalizado con acabado profesional.</p>
+                <span class="estado activo">$8</span>
+            </div>
+            <div class="rama">
+                <h3>Corte + Barba</h3>
+                <p>Corte completo más arreglo de barba.</p>
+                <span class="estado activo">$12</span>
+            </div>
+            <div class="rama">
+                <h3>Afeitado clásico</h3>
+                <p>Afeitado con navaja y toalla caliente.</p>
+                <span class="estado activo">$6</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="precios">
+        <h2>Precios</h2>
+        <p style="text-align:center; color:var(--gris);">Todos nuestros servicios incluyen atención personalizada.</p>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Av. Principal 123, Guayaquil. Lunes a Sábado, 9am - 8pm.</p>
+        <a href="https://wa.me/593XXXXXXXXX" class="boton">WhatsApp</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Barbero El Rey - Ejemplo creado por Vertex Tech</p>
+    </footer>
+
+</body>
+</html>
