@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Urban Style | Ejemplo</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .hero-tienda {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            background: radial-gradient(ellipse at center top, #1a0a2a 0%, #0a0a0f 70%);
+        }
+        .hero-tienda h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #b388ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-tienda p {
+            font-size: 18px;
+            color: var(--gris);
+            margin-bottom: 40px;
+        }
+        .hero-tienda .boton {
+            background: linear-gradient(135deg, #b388ff 0%, #6a1b9a 100%);
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(179, 136, 255, 0.3);
+        }
+        .hero-tienda .boton:hover {
+            box-shadow: 0 10px 40px rgba(179, 136, 255, 0.5);
+        }
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            color: #b388ff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .tienda-item .estado.activo {
+            background-color: rgba(179, 136, 255, 0.15);
+            color: #b388ff;
+            border: 1px solid #b388ff;
+        }
+        .tienda-item:hover {
+            border-color: rgba(179, 136, 255, 0.5) !important;
+            box-shadow: 0 20px 60px rgba(179, 136, 255, 0.15) !important;
+        }
+        .tienda-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span class="v" style="color:#b388ff;">U</span>RBAN <span class="group" style="color:#b388ff;">STYLE</span>
+        </div>
+        <nav>
+            <a href="#catalogo">Catálogo</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero-tienda">
+        <h1>Estilo que habla por ti</h1>
+        <p>Ropa urbana para los que marcan tendencia. Guayaquil.</p>
+        <a href="https://wa.me/593982679961" class="boton">Comprar por WhatsApp</a>
+        <a href="../../vertex-tech/index.html" class="volver">← Volver a Vertex Tech</a>
+    </section>
+
+    <section id="catalogo">
+        <h2>Catálogo</h2>
+        <div class="ramas-grid">
+
+            <div class="rama tienda-item">
+                <img class="tienda-img" src="https://picsum.photos/seed/ropa1/400/300" alt="Camisetas">
+                <h3>Camisetas</h3>
+                <p>Diseños exclusivos, algodón premium. Tallas S a XL.</p>
+                <span class="estado activo">$15</span>
+            </div>
+
+            <div class="rama tienda-item">
+                <img class="tienda-img" src="https://picsum.photos/seed/ropa2/400/300" alt="Pantalones">
+                <h3>Pantalones</h3>
+                <p>Jeans, joggers y cargo. Estilo urbano para todos los días.</p>
+                <span class="estado activo">$25</span>
+            </div>
+
+            <div class="rama tienda-item">
+                <img class="tienda-img" src="https://picsum.photos/seed/ropa3/400/300" alt="Gorras">
+                <h3>Gorras y accesorios</h3>
+                <p>Gorras, cadenas, pulseras y más. Completa tu look.</p>
+                <span class="estado activo">$10</span>
+            </div>
+
+            <div class="rama tienda-item">
+                <img class="tienda-img" src="https://picsum.photos/seed/ropa4/400/300" alt="Zapatillas">
+                <h3>Zapatillas</h3>
+                <p>Las mejores marcas urbanas. Nuevos modelos cada mes.</p>
+                <span class="estado activo">$60</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="nosotros">
+        <h2>Nosotros</h2>
+        <p style="text-align:center; color:var(--gris); max-width:700px; margin:0 auto;">
+            Urban Style nació en Guayaquil con una idea clara: ropa urbana de calidad a precios justos.
+            Cada prenda está seleccionada para que te veas bien sin gastar de más.
+        </p>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p style="text-align:center; color:var(--gris); margin-bottom:30px;">
+            Av. 9 de Octubre 321, Guayaquil<br>
+            Lunes a Sábado, 10am - 8pm
+        </p>
+        <div style="text-align:center;">
+            <a href="https://wa.me/593982679961" class="boton">Comprar por WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Tienda Urban Style - Ejemplo creado por Vertex Tech</p>
+    </footer>
+
+</body>
+</html>
