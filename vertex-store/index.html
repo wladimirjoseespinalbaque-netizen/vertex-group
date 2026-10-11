@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex Store | Próximamente</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .hero-store {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            background: radial-gradient(ellipse at center top, #1a0a2a 0%, #0a0a0f 70%);
+        }
+        .hero-store h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #b388ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-store p {
+            font-size: 18px;
+            color: var(--gris);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+        .hero-store .boton {
+            background: linear-gradient(135deg, #b388ff 0%, #6a1b9a 100%);
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(179, 136, 255, 0.3);
+        }
+        .hero-store .boton:hover {
+            box-shadow: 0 10px 40px rgba(179, 136, 255, 0.5);
+        }
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            color: #b388ff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .store-item .estado.activo {
+            background-color: rgba(179, 136, 255, 0.15);
+            color: #b388ff;
+            border: 1px solid #b388ff;
+        }
+        .store-item:hover {
+            border-color: rgba(179, 136, 255, 0.5) !important;
+            box-shadow: 0 20px 60px rgba(179, 136, 255, 0.15) !important;
+        }
+        .aviso {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(179, 136, 255, 0.05);
+            border: 1px solid rgba(179, 136, 255, 0.2);
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        .aviso p {
+            color: var(--gris);
+            font-size: 16px;
+            margin: 0;
+        }
+        .aviso strong {
+            color: #b388ff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="../index.html" style="text-decoration:none; color:inherit;">
+                <span class="v" style="color:#b388ff;">V</span>ERTEX <span class="group" style="color:#b388ff;">STORE</span>
+            </a>
+        </div>
+        <nav>
+            <a href="../index.html">← Volver a Vertex Group</a>
+            <a href="#categorias">Categorías</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero-store">
+        <h1>Vertex Store</h1>
+        <p>Productos tecnológicos y soluciones digitales. Muy pronto disponible.</p>
+        <a href="https://wa.me/593982679961" class="boton">Avisarme cuando abra</a>
+        <a href="../index.html" class="volver">← Volver a Vertex Group</a>
+    </section>
+
+    <section id="categorias">
+        <h2>Lo que vendremos</h2>
+        <div class="ramas-grid">
+
+            <div class="rama store-item">
+                <h3>Tecnología</h3>
+                <p>Accesorios para celular, computadoras, audífonos, cables y más.</p>
+                <span class="estado activo">Próximamente</span>
+            </div>
+
+            <div class="rama store-item">
+                <h3>Gadgets</h3>
+                <p>Relojes inteligentes, cámaras, parlantes y dispositivos útiles.</p>
+                <span class="estado activo">Próximamente</span>
+            </div>
+
+            <div class="rama store-item">
+                <h3>Servicios Digitales</h3>
+                <p>Páginas web, logos, mantenimiento y soluciones para negocios.</p>
+                <span class="estado activo">Próximamente</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="aviso">
+            <p><strong>Aviso:</strong> Vertex Store abrirá cuando el fundador cumpla 18 años y tenga su cuenta bancaria propia. Mientras tanto, puedes contactarnos por WhatsApp para recibir novedades.</p>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p style="text-align:center; color:var(--gris); margin-bottom:30px;">
+            Guayaquil, Ecuador<br>
+            Atención por WhatsApp
+        </p>
+        <div style="text-align:center;">
+            <a href="https://wa.me/593982679961" class="boton">Escribir por WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Vertex Store - Parte de Vertex Group</p>
+    </footer>
+
+</body>
+</html>
