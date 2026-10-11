@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estética Bella Vida | Ejemplo</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .hero-estetica {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            background: radial-gradient(ellipse at center top, #2a0e1a 0%, #0a0a0f 70%);
+        }
+        .hero-estetica h1 {
+            font-family: Georgia, serif;
+            font-size: 56px;
+            font-weight: 700;
+            font-style: italic;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #e8b4b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-estetica p {
+            font-size: 18px;
+            color: var(--gris);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .hero-estetica .boton {
+            background: linear-gradient(135deg, #c98a95 0%, #8b3a52 100%);
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(201, 138, 149, 0.3);
+        }
+        .hero-estetica .boton:hover {
+            box-shadow: 0 10px 40px rgba(201, 138, 149, 0.5);
+        }
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            color: #e8b4b8;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .estetica-item .estado.activo {
+            background-color: rgba(201, 138, 149, 0.15);
+            color: #e8b4b8;
+            border: 1px solid #c98a95;
+        }
+        .estetica-item:hover {
+            border-color: rgba(201, 138, 149, 0.5) !important;
+            box-shadow: 0 20px 60px rgba(201, 138, 149, 0.15) !important;
+        }
+        .estetica-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span class="v" style="color:#e8b4b8;">B</span>ELLA <span class="group" style="color:#e8b4b8;">VIDA</span>
+        </div>
+        <nav>
+            <a href="#servicios">Servicios</a>
+            <a href="#precios">Precios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero-estetica">
+        <h1>Belleza y cuidado para ti</h1>
+        <p>El espacio donde te consientes y te ves mejor. Guayaquil.</p>
+        <a href="https://wa.me/593982679961" class="boton">Reservar cita</a>
+        <a href="../../vertex-tech/index.html" class="volver">← Volver a Vertex Tech</a>
+    </section>
+
+    <section id="servicios">
+        <h2>Servicios</h2>
+        <div class="ramas-grid">
+
+            <div class="rama estetica-item">
+                <img class="estetica-img" src="https://picsum.photos/seed/est1/400/300" alt="Corte y peinado">
+                <h3>Corte y peinado</h3>
+                <p>Cortes modernos, peinados para eventos y tratamientos capilares.</p>
+                <span class="estado activo">$15</span>
+            </div>
+
+            <div class="rama estetica-item">
+                <img class="estetica-img" src="https://picsum.photos/seed/est2/400/300" alt="Manicure y pedicure">
+                <h3>Manicure y pedicure</h3>
+                <p>Uñas esculpidas, semipermanente y diseños personalizados.</p>
+                <span class="estado activo">$12</span>
+            </div>
+
+            <div class="rama estetica-item">
+                <img class="estetica-img" src="https://picsum.photos/seed/est3/400/300" alt="Maquillaje">
+                <h3>Maquillaje profesional</h3>
+                <p>Maquillaje para bodas, quinceañeras, eventos y sesiones de fotos.</p>
+                <span class="estado activo">$25</span>
+            </div>
+
+            <div class="rama estetica-item">
+                <img class="estetica-img" src="https://picsum.photos/seed/est4/400/300" alt="Tratamientos faciales">
+                <h3>Tratamientos faciales</h3>
+                <p>Limpieza facial, hidratación y cuidado de la piel.</p>
+                <span class="estado activo">$30</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="precios">
+        <h2>Combos</h2>
+        <div class="ramas-grid">
+            <div class="rama estetica-item">
+                <h3>Combo Básico</h3>
+                <p>Corte + manicure. Para verte bien sin gastar mucho.</p>
+                <span class="estado activo">$22</span>
+            </div>
+            <div class="rama estetica-item">
+                <h3>Combo Completo</h3>
+                <p>Corte + manicure + pedicure + maquillaje.</p>
+                <span class="estado activo">$50</span>
+            </div>
+            <div class="rama estetica-item">
+                <h3>Combo Novia</h3>
+                <p>Peinado + maquillaje + prueba previa. Para tu día especial.</p>
+                <span class="estado activo">$80</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p style="text-align:center; color:var(--gris); margin-bottom:30px;">
+            Av. Las Palmeras 456, Guayaquil<br>
+            Lunes a Sábado, 9am - 8pm
+        </p>
+        <div style="text-align:center;">
+            <a href="https://wa.me/593982679961" class="boton">Reservar cita</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Estética Bella Vida - Ejemplo creado por Vertex Tech</p>
+    </footer>
+
+</body>
+</html>
