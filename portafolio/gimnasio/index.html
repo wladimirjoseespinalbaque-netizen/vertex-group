@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasio Iron Power | Ejemplo</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .hero-gym {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            background: radial-gradient(ellipse at center top, #0a1a0f 0%, #0a0a0f 70%);
+        }
+        .hero-gym h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #00e676 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gym p {
+            font-size: 18px;
+            color: var(--gris);
+            margin-bottom: 40px;
+        }
+        .hero-gym .boton {
+            background: linear-gradient(135deg, #00e676 0%, #008a3a 100%);
+            color: #0a0a0f;
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.3);
+        }
+        .hero-gym .boton:hover {
+            box-shadow: 0 10px 40px rgba(0, 230, 118, 0.5);
+        }
+        .volver {
+            display: inline-block;
+            margin-top: 30px;
+            color: #00e676;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .gym-item .estado.activo {
+            background-color: rgba(0, 230, 118, 0.15);
+            color: #00e676;
+            border: 1px solid #00e676;
+        }
+        .gym-item:hover {
+            border-color: rgba(0, 230, 118, 0.5) !important;
+            box-shadow: 0 20px 60px rgba(0, 230, 118, 0.15) !important;
+        }
+        .gym-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span class="v" style="color:#00e676;">I</span>RON <span class="group" style="color:#00e676;">POWER</span>
+        </div>
+        <nav>
+            <a href="#servicios">Servicios</a>
+            <a href="#precios">Precios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero-gym">
+        <h1>Entrena fuerte, vive mejor</h1>
+        <p>El gimnasio que te ayuda a alcanzar tu mejor versión. Guayaquil.</p>
+        <a href="https://wa.me/593982679961" class="boton">Reservar por WhatsApp</a>
+        <a href="../../vertex-tech/index.html" class="volver">← Volver a Vertex Tech</a>
+    </section>
+
+    <section id="servicios">
+        <h2>Servicios</h2>
+        <div class="ramas-grid">
+
+            <div class="rama gym-item">
+                <img class="gym-img" src="https://picsum.photos/seed/gym1/400/300" alt="Sala de pesas">
+                <h3>Musculación</h3>
+                <p>Equipos de última generación y entrenadores certificados.</p>
+                <span class="estado activo">Incluido</span>
+            </div>
+
+            <div class="rama gym-item">
+                <img class="gym-img" src="https://picsum.photos/seed/gym2/400/300" alt="Clases grupales">
+                <h3>Clases grupales</h3>
+                <p>Spinning, zumba, yoga, crossfit y más.</p>
+                <span class="estado activo">Incluido</span>
+            </div>
+
+            <div class="rama gym-item">
+                <img class="gym-img" src="https://picsum.photos/seed/gym3/400/300" alt="Entrenador personal">
+                <h3>Entrenador personal</h3>
+                <p>Plan personalizado según tus objetivos.</p>
+                <span class="estado activo">+$20/mes</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="precios">
+        <h2>Precios</h2>
+        <div class="ramas-grid">
+            <div class="rama">
+                <h3>Plan Básico</h3>
+                <p>Acceso a sala de pesas y cardio.</p>
+                <span class="estado activo">$25/mes</span>
+            </div>
+            <div class="rama">
+                <h3>Plan Full</h3>
+                <p>Acceso total + clases grupales.</p>
+                <span class="estado activo">$35/mes</span>
+            </div>
+            <div class="rama">
+                <h3>Plan Premium</h3>
+                <p>Todo incluido + entrenador personal.</p>
+                <span class="estado activo">$55/mes</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p style="text-align:center; color:var(--gris); margin-bottom:30px;">
+            Av. Principal 789, Guayaquil<br>
+            Lunes a Sábado, 5am - 10pm
+        </p>
+        <div style="text-align:center;">
+            <a href="https://wa.me/593982679961" class="boton">Reservar por WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Gimnasio Iron Power - Ejemplo creado por Vertex Tech</p>
+    </footer>
+
+</body>
+</html>
