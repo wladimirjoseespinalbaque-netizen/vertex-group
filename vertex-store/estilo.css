@@ -1,8 +1,8 @@
-/* Estilos específicos para la tienda */
+/* --- Estilos Generales de la Tienda --- */
 .hero-store {
-    padding: 40px 20px;
+    padding: 100px 20px 40px;
     text-align: center;
-    background: radial-gradient(ellipse at center top, #1a0a2a 0%, #0a0a0f 70%);
+    background: radial-gradient(ellipse at center top, #1a0a2a 0%, #0a0a0f 80%);
 }
 .hero-store h1 {
     font-size: 48px;
@@ -11,37 +11,46 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 10px;
 }
+.hero-store p {
+    color: #b8b8c0;
+    font-size: 18px;
+}
 
-/* Botón de búsqueda en el menú */
-.search-btn {
+/* --- Botón de Búsqueda (Lupa) en el Header --- */
+.btn-search {
     background: transparent;
     border: 1px solid #b388ff;
     color: #b388ff;
-    padding: 8px 12px;
-    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
     font-size: 16px;
     transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.search-btn:hover {
+.btn-search:hover {
     background: #b388ff;
     color: #0a0a0f;
 }
 
-/* Panel de búsqueda flotante */
-.search-overlay {
-    display: none;
+/* --- Ventana Flotante de Búsqueda --- */
+.search-modal {
+    display: none; /* Oculto por defecto */
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    z-index: 2000;
+    background: rgba(10, 10, 15, 0.95);
+    z-index: 9999;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(5px);
 }
-.search-modal {
+.search-content {
     background: #12121a;
     padding: 40px;
-    border-radius: 12px;
+    border-radius: 15px;
     border: 1px solid #b388ff;
     width: 90%;
     max-width: 600px;
@@ -52,37 +61,56 @@
     position: absolute;
     top: 10px; right: 20px;
     font-size: 30px;
-    color: white;
+    color: #b8b8c0;
+    background: none;
+    border: none;
     cursor: pointer;
 }
-.search-input-modal {
+.close-btn:hover { color: white; }
+.search-content h2 { color: white; margin-bottom: 20px; }
+.search-input-group {
+    position: relative;
     width: 100%;
-    padding: 15px;
-    margin-top: 20px;
-    background: #0a0a0f;
+}
+.search-input-group input {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    border-radius: 30px;
     border: 1px solid #333;
+    background: #0a0a0f;
     color: white;
-    border-radius: 8px;
     font-size: 18px;
     outline: none;
 }
+.search-input-group input:focus { border-color: #b388ff; }
+.search-input-group i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b388ff;
+    font-size: 18px;
+}
 
-/* Sección de Categorías (Como Amazon) */
-.categories-section {
+/* --- Sección de Categorías --- */
+.seccion-categorias {
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
 }
-.categories-section h2 {
+.titulo-seccion {
     color: white;
+    font-size: 24px;
     margin-bottom: 20px;
+    border-left: 4px solid #b388ff;
+    padding-left: 10px;
 }
-.categories-grid {
+.grid-categorias {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
 }
-.category-card {
+.tarjeta-categoria {
     background: #12121a;
     border: 1px solid #2a2a35;
     border-radius: 12px;
@@ -91,95 +119,96 @@
     cursor: pointer;
     transition: 0.3s;
 }
-.category-card:hover {
+.tarjeta-categoria:hover {
     border-color: #b388ff;
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(179, 136, 255, 0.1);
 }
-.cat-icon {
+.icono-cat {
     font-size: 40px;
+    color: #b388ff;
     margin-bottom: 15px;
 }
-.category-card h3 {
+.tarjeta-categoria h3 {
     color: white;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 8px;
 }
-.category-card p {
+.tarjeta-categoria p {
     color: #b8b8c0;
     font-size: 14px;
 }
 
-/* Carrusel de Productos */
-.section-title {
-    text-align: left;
+/* --- Sección de Productos (Carrusel) --- */
+.seccion-productos {
     max-width: 1200px;
-    margin: 40px auto 20px;
-    padding: 0 20px;
-    font-size: 24px;
-    color: white;
-}
-.carousel-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 50px auto;
     padding: 0 20px;
 }
-.carousel-container {
+.carrusel-wrapper {
+    background: #12121a;
+    border: 1px solid #2a2a35;
+    border-radius: 15px;
+    padding: 20px;
+}
+.carrusel {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    padding: 20px 0;
     scroll-snap-type: x mandatory;
-    scrollbar-width: none;
+    scrollbar-width: thin; /* Barra de scroll visible */
+    scrollbar-color: #b388ff #12121a;
+    padding-bottom: 10px;
 }
-.carousel-container::-webkit-scrollbar {
-    display: none;
-}
+.carrusel::-webkit-scrollbar { height: 8px; }
+.carrusel::-webkit-scrollbar-track { background: #0a0a0f; border-radius: 10px; }
+.carrusel::-webkit-scrollbar-thumb { background: #b388ff; border-radius: 10px; }
 
-/* Tarjetas de Producto */
-.product-card {
-    min-width: 250px;
-    background: #12121a;
+.tarjeta-producto {
+    min-width: 220px;
+    background: #0a0a0f;
     border: 1px solid #2a2a35;
     border-radius: 12px;
     padding: 15px;
     scroll-snap-align: start;
-    transition: transform 0.3s, border-color 0.3s;
+    transition: 0.3s;
 }
-.product-card:hover {
-    transform: translateY(-5px);
+.tarjeta-producto:hover {
     border-color: #b388ff;
 }
-.product-img {
+.img-producto {
     width: 100%;
-    height: 200px;
-    object-fit: contain; /* Cambiado a contain para que no se corten las fotos */
+    height: 180px;
+    object-fit: contain;
+    background: #fff; /* Fondo blanco para que las fotos resalten */
     border-radius: 8px;
     margin-bottom: 15px;
-    background: #0a0a0f;
 }
-.product-title {
-    font-size: 18px;
+.tarjeta-producto h3 {
     color: white;
+    font-size: 16px;
     margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.product-price {
-    font-size: 20px;
+.precio {
     color: #b388ff;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 15px;
 }
-.btn-buy {
+.btn-comprar {
     display: block;
     text-align: center;
-    background: transparent;
-    border: 1px solid #b388ff;
-    color: #b388ff;
+    background: #b388ff;
+    color: #0a0a0f;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
 }
-.btn-buy:hover {
-    background: #b388ff;
-    color: #0a0a0f;
+.btn-comprar:hover {
+    background: #d1b3ff;
 }
