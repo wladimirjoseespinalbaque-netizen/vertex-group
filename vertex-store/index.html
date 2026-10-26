@@ -3,73 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vertex Store | Tecnología y Gadgets</title>
+    <title>Vertex Store | Tienda Oficial</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="estilo.css">
-    <!-- Iconos para el buscador y las categorías -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header>
+    <header class="header-tienda">
         <div class="logo">
-            <a href="../index.html" style="text-decoration:none; color:inherit;">
-                <span class="v" style="color:#b388ff;">V</span>ERTEX <span class="group" style="color:#b388ff;">STORE</span>
+            <a href="../index.html" style="text-decoration:none; color:#111;">
+                <span style="color:#0056b3; font-weight:900;">V</span>ERTEX <span style="color:#666; font-weight:300;">STORE</span>
             </a>
         </div>
         <nav>
             <a href="../index.html">← Volver a Vertex Group</a>
             <a href="#categorias">Categorías</a>
             <a href="#contacto">Contacto</a>
-            <!-- Botón de búsqueda moderno (Lupa) -->
-            <button class="btn-search" onclick="abrirBuscador()">
-                <i class="fas fa-search"></i>
-            </button>
+            <button class="btn-search" onclick="abrirBuscador()">🔍 Buscar</button>
         </nav>
     </header>
 
-    <!-- Ventana Flotante del Buscador (Oculta por defecto) -->
+    <!-- Ventana Flotante del Buscador -->
     <div id="search-modal" class="search-modal">
         <div class="search-content">
-            <button class="close-btn" onclick="cerrarBuscador()">&times;</button>
-            <h2>Buscar en Vertex Store</h2>
-            <div class="search-input-group">
-                <input type="text" id="input-busqueda" placeholder="¿Qué estás buscando hoy?" onkeyup="filtrarProductos()">
-                <i class="fas fa-search"></i>
-            </div>
+            <button class="close-btn" onclick="cerrarBuscador()">✖</button>
+            <h2>¿Qué estás buscando?</h2>
+            <input type="text" id="input-busqueda" placeholder="Ej: audífonos, reloj..." onkeyup="filtrarProductos()">
         </div>
     </div>
 
     <section class="hero-store">
-        <h1>Vertex Store</h1>
-        <p>Descubre la mejor tecnología, ropa, arquitectura y hogar.</p>
+        <h1>Bienvenido a Vertex Store</h1>
+        <p>Descubre la mejor tecnología, ropa, arquitectura y hogar al mejor precio.</p>
     </section>
 
-    <!-- SECCIÓN DE CATEGORÍAS Y SUB-RAMAS -->
+    <!-- CATEGORÍAS -->
     <section id="categorias" class="seccion-categorias">
         <h2 class="titulo-seccion">Explorar Categorías</h2>
         <div class="grid-categorias">
             
-            <div class="tarjeta-categoria" onclick="mostrarAlerta('Tecnología')">
-                <i class="fas fa-laptop-code icono-cat"></i>
+            <div class="tarjeta-categoria" onclick="filtrarPorCategoria('tecnologia')">
+                <div class="icono-cat">💻</div>
                 <h3>Tecnología</h3>
                 <p>Gamer, Youtuber, Repuestos</p>
             </div>
 
-            <div class="tarjeta-categoria" onclick="mostrarAlerta('Ropa')">
-                <i class="fas fa-tshirt icono-cat"></i>
+            <div class="tarjeta-categoria" onclick="filtrarPorCategoria('ropa')">
+                <div class="icono-cat">👕</div>
                 <h3>Ropa</h3>
                 <p>Moda, Calzado, Accesorios</p>
             </div>
 
-            <div class="tarjeta-categoria" onclick="mostrarAlerta('Arquitectura')">
-                <i class="fas fa-drafting-compass icono-cat"></i>
+            <div class="tarjeta-categoria" onclick="filtrarPorCategoria('arquitectura')">
+                <div class="icono-cat">📐</div>
                 <h3>Arquitectura</h3>
                 <p>Planos, Materiales, Diseño</p>
             </div>
 
-            <div class="tarjeta-categoria" onclick="mostrarAlerta('Hogar')">
-                <i class="fas fa-couch icono-cat"></i>
+            <div class="tarjeta-categoria" onclick="filtrarPorCategoria('hogar')">
+                <div class="icono-cat">🛋️</div>
                 <h3>Hogar</h3>
                 <p>Cocina, Entretenimiento, Muebles</p>
             </div>
@@ -77,14 +69,16 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE PRODUCTOS DESTACADOS -->
+    <!-- PRODUCTOS CON FLECHAS -->
     <section class="seccion-productos">
         <h2 class="titulo-seccion">🔥 Productos Destacados</h2>
         
         <div class="carrusel-wrapper">
+            <!-- Flecha Izquierda -->
+            <button class="flecha-carrusel" onclick="moverCarrusel(-1)">❮</button>
+            
             <div class="carrusel" id="carrusel-productos">
                 
-                <!-- Producto 1 -->
                 <div class="tarjeta-producto" data-nombre="audifonos bluetooth" data-categoria="tecnologia">
                     <img src="img/audifonos_bluetooth.jpg" alt="Audífonos" class="img-producto">
                     <h3>Audífonos Bluetooth</h3>
@@ -92,7 +86,6 @@
                     <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20los%20audifonos" class="btn-comprar">Comprar</a>
                 </div>
 
-                <!-- Producto 2 -->
                 <div class="tarjeta-producto" data-nombre="smartwatch pro reloj" data-categoria="tecnologia">
                     <img src="img/Smartwatch_Pro.jpg" alt="Smartwatch" class="img-producto">
                     <h3>Smartwatch Pro</h3>
@@ -100,7 +93,6 @@
                     <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20smartwatch" class="btn-comprar">Comprar</a>
                 </div>
 
-                <!-- Producto 3 -->
                 <div class="tarjeta-producto" data-nombre="cargador rapido" data-categoria="tecnologia">
                     <img src="img/Cargador_Rápido_65W.jpg" alt="Cargador" class="img-producto">
                     <h3>Cargador Rápido 65W</h3>
@@ -108,7 +100,6 @@
                     <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20cargador" class="btn-comprar">Comprar</a>
                 </div>
 
-                <!-- Producto 4 -->
                 <div class="tarjeta-producto" data-nombre="parlante portatil" data-categoria="tecnologia">
                     <img src="img/Parlante_Portátil.jpg" alt="Parlante" class="img-producto">
                     <h3>Parlante Portátil</h3>
@@ -117,10 +108,13 @@
                 </div>
 
             </div>
+            
+            <!-- Flecha Derecha -->
+            <button class="flecha-carrusel" onclick="moverCarrusel(1)">❯</button>
         </div>
     </section>
 
-    <footer style="margin-top: 60px;">
+    <footer class="footer-tienda">
         <p>© 2026 Vertex Store - Parte de Vertex Group</p>
     </footer>
 
