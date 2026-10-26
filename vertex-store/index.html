@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vertex Store | Tecnología y Gadgets</title>
-    
-    <!-- Enlace al CSS global (para el header y footer) -->
     <link rel="stylesheet" href="../style.css">
-    <!-- Enlace al CSS específico de la tienda -->
     <link rel="stylesheet" href="estilo.css">
+    <!-- Iconos de FontAwesome para la lupa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -19,59 +18,94 @@
             </a>
         </div>
         <nav>
-            <a href="../index.html">← Volver a Vertex Group</a>
+            <a href="../index.html">← Volver</a>
+            <a href="#">Categorías</a>
             <a href="#contacto">Contacto</a>
+            <!-- Botón de búsqueda moderno -->
+            <button class="search-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
         </nav>
     </header>
 
+    <!-- Panel de búsqueda flotante (oculto por defecto) -->
+    <div id="search-overlay" class="search-overlay">
+        <div class="search-modal">
+            <span class="close-btn" onclick="toggleSearch()">&times;</span>
+            <h2>¿Qué estás buscando?</h2>
+            <input type="text" id="searchInput" class="search-input-modal" placeholder="Buscar audífonos, relojes, ropa...">
+        </div>
+    </div>
+
     <section class="hero-store">
         <h1>Vertex Store</h1>
-        <p style="color: var(--gris); margin-bottom: 40px;">Los mejores gadgets y tecnología. Muy pronto disponible.</p>
-        
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar productos (ej. audífonos, reloj...)">
-            <div class="categories">
-                <!-- Le pasamos el 'event' a la función para saber qué botón se tocó -->
-                <button class="cat-btn active" onclick="filterProducts('todos', event)">Todos</button>
-                <button class="cat-btn" onclick="filterProducts('audio', event)">Audio</button>
-                <button class="cat-btn" onclick="filterProducts('relojes', event)">Relojes</button>
-                <button class="cat-btn" onclick="filterProducts('cargadores', event)">Cargadores</button>
+        <p style="color: var(--gris); margin-bottom: 20px;">Los mejores gadgets, tecnología y más. Muy pronto disponible.</p>
+    </section>
+
+    <!-- NUEVA SECCIÓN: CATEGORÍAS PRINCIPALES -->
+    <section class="categories-section">
+        <h2>Explorar Categorías</h2>
+        <div class="categories-grid">
+            
+            <div class="category-card" onclick="filterByCategory('tecnologia')">
+                <div class="cat-icon">💻</div>
+                <h3>Tecnología</h3>
+                <p>Gamer, Youtuber, Repuestos</p>
             </div>
+
+            <div class="category-card" onclick="filterByCategory('ropa')">
+                <div class="cat-icon">👕</div>
+                <h3>Ropa</h3>
+                <p>Hombre, Mujer, Accesorios</p>
+            </div>
+
+            <div class="category-card" onclick="filterByCategory('hogar')">
+                <div class="cat-icon">🏠</div>
+                <h3>Hogar</h3>
+                <p>Cocina, Entretenimiento, Muebles</p>
+            </div>
+
+            <div class="category-card" onclick="filterByCategory('arquitectura')">
+                <div class="cat-icon">📐</div>
+                <h3>Arquitectura</h3>
+                <p>Materiales, Diseño</p>
+            </div>
+
         </div>
     </section>
 
-    <h2 class="section-title"> Destacados</h2>
-    <div class="carousel-container">
-        <!-- Producto 1 -->
-        <div class="product-card" data-category="audio">
-            <img src="img/audifonos_bluetooth.jpg" alt="Audífonos" class="product-img">
-            <h3 class="product-title">Audífonos Bluetooth</h3>
-            <p class="product-price">$25.00</p>
-            <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20los%20audifonos" class="btn-buy">Comprar</a>
-        </div>
-
-        <!-- Producto 2 -->
-        <div class="product-card" data-category="relojes">
-            <img src="img/Smartwatch_Pro.jpg" alt="Smartwatch" class="product-img">
-            <h3 class="product-title">Smartwatch Pro</h3>
-            <p class="product-price">$45.00</p>
-            <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20smartwatch" class="btn-buy">Comprar</a>
-        </div>
-
-        <!-- Producto 3 -->
-        <div class="product-card" data-category="cargadores">
-            <img src="img/Cargador_Rápido_65W.jpg" alt="Cargador" class="product-img">
-            <h3 class="product-title">Cargador Rápido 65W</h3>
-            <p class="product-price">$15.00</p>
-            <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20cargador" class="btn-buy">Comprar</a>
-        </div>
-
-        <!-- Producto 4 -->
-        <div class="product-card" data-category="audio">
-            <img src="img/Parlante_Portátil.jpg" alt="Parlante" class="product-img">
-            <h3 class="product-title">Parlante Portátil</h3>
-            <p class="product-price">$35.00</p>
-            <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20parlante" class="btn-buy">Comprar</a>
+    <!-- CARRUSEL DE PRODUCTOS -->
+    <h2 class="section-title">🔥 Destacados</h2>
+    <div class="carousel-wrapper">
+        <div class="carousel-container" id="carousel">
+            <!-- Producto 1 -->
+            <div class="product-card" data-category="tecnologia">
+                <img src="img/audifonos_bluetooth.jpg" alt="Audífonos" class="product-img">
+                <h3 class="product-title">Audífonos Bluetooth</h3>
+                <p class="product-price">$25.00</p>
+                <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20los%20audifonos" class="btn-buy">Comprar</a>
+            </div>
+            <!-- Producto 2 -->
+            <div class="product-card" data-category="tecnologia">
+                <img src="img/Smartwatch_Pro.jpg" alt="Smartwatch" class="product-img">
+                <h3 class="product-title">Smartwatch Pro</h3>
+                <p class="product-price">$45.00</p>
+                <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20smartwatch" class="btn-buy">Comprar</a>
+            </div>
+            <!-- Producto 3 -->
+            <div class="product-card" data-category="tecnologia">
+                <img src="img/Cargador_Rápido_65W.jpg" alt="Cargador" class="product-img">
+                <h3 class="product-title">Cargador Rápido 65W</h3>
+                <p class="product-price">$15.00</p>
+                <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20cargador" class="btn-buy">Comprar</a>
+            </div>
+            <!-- Producto 4 -->
+            <div class="product-card" data-category="tecnologia">
+                <img src="img/Parlante_Portátil.jpg" alt="Parlante" class="product-img">
+                <h3 class="product-title">Parlante Portátil</h3>
+                <p class="product-price">$35.00</p>
+                <a href="https://wa.me/593982679961?text=Hola,%20quiero%20comprar%20el%20parlante" class="btn-buy">Comprar</a>
+            </div>
         </div>
     </div>
 
@@ -79,7 +113,6 @@
         <p>© 2026 Vertex Store - Parte de Vertex Group</p>
     </footer>
 
-    <!-- Enlace al archivo JavaScript -->
     <script src="store.js"></script>
 </body>
 </html>
