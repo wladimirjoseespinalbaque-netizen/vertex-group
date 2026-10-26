@@ -1,41 +1,42 @@
-// Función para abrir y cerrar el panel de búsqueda
-function toggleSearch() {
-    const overlay = document.getElementById('search-overlay');
-    if (overlay.style.display === 'flex') {
-        overlay.style.display = 'none';
-    } else {
-        overlay.style.display = 'flex';
-        document.getElementById('searchInput').focus(); // Pone el cursor automáticamente
-    }
+// --- CONTROL DEL BUSCADOR ---
+function abrirBuscador() {
+    document.getElementById('search-modal').style.display = 'flex';
+    document.getElementById('input-busqueda').focus(); // Pone el cursor automáticamente
 }
 
-// Lógica del buscador en vivo
-const searchInput = document.getElementById('searchInput');
-const productCards = document.querySelectorAll('.product-card');
+function cerrarBuscador() {
+    document.getElementById('search-modal').style.display = 'none';
+}
 
-searchInput.addEventListener('keyup', function() {
-    const searchTerm = searchInput.value.toLowerCase();
-    productCards.forEach(card => {
-        const title = card.querySelector('.product-title').textContent.toLowerCase();
-        if (title.includes(searchTerm)) {
-            card.style.display = 'block';
+// --- LÓGICA DE FILTRADO DE PRODUCTOS ---
+function filtrarProductos() {
+    let input = document.getElementById('input-busqueda').value.toLowerCase();
+    let productos = document.querySelectorAll('.tarjeta-producto');
+
+    productos.forEach(producto => {
+        // Busca en el atributo "data-nombre" del HTML
+        let nombre = producto.getAttribute('data-nombre').toLowerCase();
+        
+        if (nombre.includes(input)) {
+            producto.style.display = 'block';
         } else {
-            card.style.display = 'none';
+            producto.style.display = 'none';
         }
     });
-});
+}
 
-// Función para simular el filtro de categorías grandes
-function filterByCategory(category) {
-    // Esto es una simulación visual. En el futuro, aquí puedes cambiar la vista o cargar productos específicos.
-    alert(`Has seleccionado la categoría: ${category.toUpperCase()}. Aquí se mostrarán los productos de esta sección.`);
+// --- LÓGICA DE LAS CATEGORÍAS ---
+function mostrarAlerta(categoria) {
+    // Como aún no tienes los productos (hasta los 18), mostramos un mensaje amigable.
+    alert(`¡Excelente elección! Pronto tendremos los mejores productos de ${categoria}. ¡Prepárate!`);
     
-    // Opcional: Filtrar los productos actuales por su data-category
-    productCards.forEach(card => {
-        if (card.getAttribute('data-category') === category) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
+    // Opcional: Si quieres que al tocar una categoría, la página baje a los productos, descomenta esta línea:
+    // document.querySelector('.seccion-productos').scrollIntoView({ behavior: 'smooth' });
 }
+
+// Cerrar el buscador si el usuario presiona la tecla "Escape"
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        cerrarBuscador();
+    }
+});
