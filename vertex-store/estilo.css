@@ -1,6 +1,6 @@
 /* Estilos específicos para la tienda */
 .hero-store {
-    padding: 140px 20px 40px;
+    padding: 40px 20px;
     text-align: center;
     background: radial-gradient(ellipse at center top, #1a0a2a 0%, #0a0a0f 70%);
 }
@@ -9,48 +9,106 @@
     background: linear-gradient(135deg, #ffffff 0%, #b388ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-/* Barra de Búsqueda y Categorías */
-.search-container {
-    max-width: 800px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
-}
-.search-bar {
-    width: 100%;
-    padding: 15px 20px;
-    border-radius: 30px;
+/* Botón de búsqueda en el menú */
+.search-btn {
+    background: transparent;
     border: 1px solid #b388ff;
-    background: #12121a;
-    color: white;
+    color: #b388ff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
     font-size: 16px;
-    margin-bottom: 20px;
+    transition: 0.3s;
+}
+.search-btn:hover {
+    background: #b388ff;
+    color: #0a0a0f;
+}
+
+/* Panel de búsqueda flotante */
+.search-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+.search-modal {
+    background: #12121a;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #b388ff;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    text-align: center;
+}
+.close-btn {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+.search-input-modal {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background: #0a0a0f;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 8px;
+    font-size: 18px;
     outline: none;
 }
-.categories {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+
+/* Sección de Categorías (Como Amazon) */
+.categories-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
-.cat-btn {
-    padding: 8px 20px;
-    border-radius: 20px;
-    border: 1px solid #333;
-    background: transparent;
-    color: #b8b8c0;
+.categories-section h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.category-card {
+    background: #12121a;
+    border: 1px solid #2a2a35;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
     cursor: pointer;
     transition: 0.3s;
 }
-.cat-btn:hover, .cat-btn.active {
-    background: #b388ff;
-    color: #0a0a0f;
+.category-card:hover {
     border-color: #b388ff;
+    transform: translateY(-5px);
+}
+.cat-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+.category-card h3 {
+    color: white;
+    margin-bottom: 5px;
+}
+.category-card p {
+    color: #b8b8c0;
+    font-size: 14px;
 }
 
-/* Carrusel (Slider) */
+/* Carrusel de Productos */
 .section-title {
     text-align: left;
     max-width: 1200px;
@@ -59,18 +117,21 @@
     font-size: 24px;
     color: white;
 }
+.carousel-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 .carousel-container {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 20px 0;
     scroll-snap-type: x mandatory;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
 }
 .carousel-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
 }
 
 /* Tarjetas de Producto */
@@ -90,10 +151,10 @@
 .product-img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain; /* Cambiado a contain para que no se corten las fotos */
     border-radius: 8px;
     margin-bottom: 15px;
-    background: #0a0a0f; /* Por si la imagen no carga */
+    background: #0a0a0f;
 }
 .product-title {
     font-size: 18px;
