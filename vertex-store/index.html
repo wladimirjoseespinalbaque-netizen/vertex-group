@@ -19,7 +19,9 @@
             <a href="../index.html">← Volver a Vertex Group</a>
             <a href="#categorias">Categorías</a>
             <a href="#contacto">Contacto</a>
-            <button class="btn-search" onclick="abrirBuscador()"> Buscar</button>
+            <!-- NUEVO: Botón del carrito -->
+            <a href="checkout.html" class="btn-carrito">🛒 Carrito (<span id="contador-carrito">0</span>)</a>
+            <button class="btn-search" onclick="abrirBuscador()">BUSCAR</button>
         </nav>
     </header>
 
@@ -83,28 +85,33 @@
                     <img src="img/audifonos_bluetooth.jpg" alt="Audífonos" class="img-producto">
                     <h3>Audífonos Bluetooth</h3>
                     <p class="precio">$25.00</p>
-                    <a href="checkout.html?producto=Audifonos%20Bluetooth&precio=$25.00" class="btn-comprar">Comprar</a>
+                    <!-- NUEVO: Botones del carrito y comprar ahora -->
+                    <button onclick="agregarAlCarrito(1, 'Audífonos Bluetooth', 25.00, 'img/audifonos_bluetooth.jpg')" class="btn-comprar">Añadir al Carrito</button>
+                    <a href="checkout.html?producto=Audifonos%20Bluetooth&precio=$25.00" class="btn-comprar-ahora">Comprar Ahora</a>
                 </div>
 
                 <div class="tarjeta-producto" data-nombre="smartwatch pro reloj" data-categoria="tecnologia">
                     <img src="img/Smartwatch_Pro.jpg" alt="Smartwatch" class="img-producto">
                     <h3>Smartwatch Pro</h3>
                     <p class="precio">$45.00</p>
-                    <a href="checkout.html?producto=Smartwatch%20Pro&precio=$45.00" class="btn-comprar">Comprar</a>
+                    <button onclick="agregarAlCarrito(2, 'Smartwatch Pro', 45.00, 'img/Smartwatch_Pro.jpg')" class="btn-comprar">Añadir al Carrito</button>
+                    <a href="checkout.html?producto=Smartwatch%20Pro&precio=$45.00" class="btn-comprar-ahora">Comprar Ahora</a>
                 </div>
 
                 <div class="tarjeta-producto" data-nombre="cargador rapido" data-categoria="tecnologia">
                     <img src="img/Cargador_Rápido_65W.jpg" alt="Cargador" class="img-producto">
                     <h3>Cargador Rápido 65W</h3>
                     <p class="precio">$15.00</p>
-                    <a href="checkout.html?producto=Cargador%20Rapido%2065W&precio=$15.00" class="btn-comprar">Comprar</a>
+                    <button onclick="agregarAlCarrito(3, 'Cargador Rápido 65W', 15.00, 'img/Cargador_Rápido_65W.jpg')" class="btn-comprar">Añadir al Carrito</button>
+                    <a href="checkout.html?producto=Cargador%20Rapido%2065W&precio=$15.00" class="btn-comprar-ahora">Comprar Ahora</a>
                 </div>
 
                 <div class="tarjeta-producto" data-nombre="parlante portatil" data-categoria="tecnologia">
                     <img src="img/Parlante_Portátil.jpg" alt="Parlante" class="img-producto">
                     <h3>Parlante Portátil</h3>
                     <p class="precio">$35.00</p>
-                    <a href="checkout.html?producto=Parlante%20Portatil&precio=$35.00" class="btn-comprar">Comprar</a>
+                    <button onclick="agregarAlCarrito(4, 'Parlante Portátil', 35.00, 'img/Parlante_Portátil.jpg')" class="btn-comprar">Añadir al Carrito</button>
+                    <a href="checkout.html?producto=Parlante%20Portatil&precio=$35.00" class="btn-comprar-ahora">Comprar Ahora</a>
                 </div>
 
             </div>
