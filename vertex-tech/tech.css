@@ -1,3 +1,4 @@
+/* --- ESTILOS ESPECÍFICOS DE VERTEX TECH --- */
 .hero-tech {
     min-height: 80vh;
     display: flex;
@@ -6,30 +7,43 @@
     align-items: center;
     text-align: center;
     padding: 140px 20px 80px;
-    background: radial-gradient(ellipse at center top, var(--azul-oscuro) 0%, var(--negro) 70%);
+    background: var(--azul-marino); /* Azul profundo como el Hero principal */
+    color: var(--blanco-puro);
+    border-bottom: 5px solid var(--dorado-camel);
 }
 
 .hero-tech h1 {
     font-size: 54px;
+    font-family: 'Playfair Display', serif;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 25px;
-    background: linear-gradient(135deg, #ffffff 0%, #d4af37 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--fondo-crema);
     max-width: 900px;
 }
 
 .hero-tech p {
     font-size: 18px;
-    color: var(--gris);
+    color: var(--dorado-camel);
     max-width: 650px;
     margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* Para que el botón de WhatsApp se vea bien sobre el fondo azul */
+.hero-tech .boton {
+    background: var(--dorado-camel);
+    color: var(--azul-marino);
+    border: 2px solid var(--dorado-camel);
+}
+
+.hero-tech .boton:hover {
+    background: transparent;
+    color: var(--dorado-camel);
 }
 
 @media (max-width: 768px) {
     .hero-tech h1 {
-        font-size: 34px;
+        font-size: 38px;
     }
 }
