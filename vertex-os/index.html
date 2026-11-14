@@ -6,6 +6,7 @@
     <title>Vertex OS | Próximamente</title>
     <link rel="stylesheet" href="../style.css">
     <style>
+        /* Estilo elegante para el Hero de OS */
         .hero-os {
             min-height: 80vh;
             display: flex;
@@ -14,64 +15,58 @@
             align-items: center;
             text-align: center;
             padding: 140px 20px 80px;
-            background: radial-gradient(ellipse at center top, #0a1a1a 0%, #0a0a0f 70%);
+            background: var(--azul-marino);
+            color: var(--blanco-puro);
+            border-bottom: 5px solid var(--dorado-camel);
         }
         .hero-os h1 {
             font-size: 56px;
+            font-family: 'Playfair Display', serif;
             font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 25px;
+            color: var(--fondo-crema);
         }
         .hero-os p {
             font-size: 18px;
-            color: var(--gris);
+            color: var(--dorado-camel);
             margin-bottom: 40px;
             max-width: 700px;
         }
         .hero-os .boton {
-            background: linear-gradient(135deg, #00d4ff 0%, #0066aa 100%);
-            color: #0a0a0f;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            background: var(--dorado-camel);
+            color: var(--azul-marino);
+            border: 2px solid var(--dorado-camel);
         }
         .hero-os .boton:hover {
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.5);
+            background: transparent;
+            color: var(--dorado-camel);
         }
         .volver {
             display: inline-block;
             margin-top: 30px;
-            color: #00d4ff;
+            color: var(--dorado-camel);
             text-decoration: none;
             font-size: 14px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .os-item .estado.activo {
-            background-color: rgba(0, 212, 255, 0.15);
-            color: #00d4ff;
-            border: 1px solid #00d4ff;
-        }
-        .os-item:hover {
-            border-color: rgba(0, 212, 255, 0.5) !important;
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.15) !important;
-        }
+        /* Aviso elegante */
         .aviso {
             text-align: center;
             padding: 40px 20px;
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
+            background: rgba(11, 32, 70, 0.05);
+            border: 1px solid var(--azul-marino);
+            border-radius: 2px;
             max-width: 700px;
             margin: 0 auto 60px;
         }
         .aviso p {
-            color: var(--gris);
+            color: var(--azul-marino);
             font-size: 16px;
             margin: 0;
         }
         .aviso strong {
-            color: #00d4ff;
+            color: var(--dorado-camel);
         }
     </style>
 </head>
@@ -80,7 +75,7 @@
     <header>
         <div class="logo">
             <a href="../index.html" style="text-decoration:none; color:inherit;">
-                <span class="v" style="color:#00d4ff;">V</span>ERTEX <span class="group" style="color:#00d4ff;">OS</span>
+                <span class="v">V</span>ERTEX <span class="group">OS</span>
             </a>
         </div>
         <nav>
@@ -101,28 +96,28 @@
         <h2>Lo que ofrecerá</h2>
         <div class="ramas-grid">
 
-            <div class="rama os-item">
+            <div class="rama">
                 <h3>Ligero</h3>
                 <p>Consume menos de 1 GB de RAM. Funciona en computadoras antiguas y modernas.</p>
-                <span class="estado activo">Próximamente</span>
+                <span class="estado proximo">Próximamente</span>
             </div>
 
-            <div class="rama os-item">
+            <div class="rama">
                 <h3>Ultra Seguro</h3>
                 <p>Protección avanzada contra virus, malware y ataques. Tu información siempre segura.</p>
-                <span class="estado activo">Próximamente</span>
+                <span class="estado proximo">Próximamente</span>
             </div>
 
-            <div class="rama os-item">
+            <div class="rama">
                 <h3>Compatible con Todo</h3>
                 <p>Ejecuta programas de Windows, Linux y más. Sin limitaciones.</p>
-                <span class="estado activo">Próximamente</span>
+                <span class="estado proximo">Próximamente</span>
             </div>
 
-            <div class="rama os-item">
+            <div class="rama">
                 <h3>Para Todos</h3>
                 <p>Programadores, gamers, diseñadores, empresas y estudiantes.</p>
-                <span class="estado activo">Próximamente</span>
+                <span class="estado proximo">Próximamente</span>
             </div>
 
         </div>
@@ -136,13 +131,8 @@
 
     <section id="contacto">
         <h2>Contacto</h2>
-        <p style="text-align:center; color:var(--gris); margin-bottom:30px;">
-            Guayaquil, Ecuador<br>
-            Atención por WhatsApp
-        </p>
-        <div style="text-align:center;">
-            <a href="https://wa.me/593982679961" class="boton">Escribir por WhatsApp</a>
-        </div>
+        <p>Guayaquil, Ecuador<br>Atención por WhatsApp</p>
+        <a href="https://wa.me/593982679961" class="boton">Escribir por WhatsApp</a>
     </section>
 
     <footer>
