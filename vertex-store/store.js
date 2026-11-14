@@ -49,3 +49,18 @@ document.addEventListener('keydown', function(event) {
         cerrarBuscador();
     }
 });
+
+// --- LÓGICA PARA EL CHECKOUT ---
+document.addEventListener("DOMContentLoaded", function() {
+    // Solo ejecutar si estamos en la página de checkout
+    if (document.getElementById('input-producto')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const producto = urlParams.get('producto');
+        const precio = urlParams.get('precio');
+
+        if (producto && precio) {
+            document.getElementById('input-producto').value = producto;
+            document.getElementById('input-precio').value = precio;
+        }
+    }
+});
