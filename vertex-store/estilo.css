@@ -292,6 +292,9 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: 0.4s;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 .btn-comprar:hover {
     background: var(--azul-marino);
@@ -362,5 +365,141 @@ body {
 }
 .btn-pagar:hover {
     background: var(--dorado-camel);
+    color: var(--azul-marino);
+}
+
+/* ========================================= */
+/* --- NUEVOS ESTILOS PARA EL CARRITO --- */
+/* ========================================= */
+
+/* Botón del carrito en la cabecera */
+.btn-carrito {
+    background: transparent;
+    color: var(--azul-marino);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--azul-marino);
+    padding: 12px 20px;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+.btn-carrito:hover {
+    background: var(--azul-marino);
+    color: var(--blanco-puro);
+}
+
+/* Resumen del carrito en la página de Checkout */
+.resumen-carrito {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--fondo-crema);
+    padding-bottom: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Cada producto en el carrito */
+.item-carrito {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #eaeaea;
+}
+
+.item-carrito img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 15px;
+    background: white;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.info-item {
+    flex: 1;
+}
+
+.info-item h4 {
+    font-size: 15px;
+    color: var(--azul-marino);
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.info-item p {
+    font-size: 13px;
+    color: #777;
+    margin: 0;
+}
+
+.btn-eliminar {
+    background: none;
+    border: none;
+    color: #d9534f;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    transition: 0.3s;
+}
+
+.btn-eliminar:hover {
+    color: #c9302c;
+    transform: scale(1.2);
+}
+
+/* Contenedor del Total */
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--fondo-crema);
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    border: 1px solid var(--dorado-camel);
+}
+
+.total-container h3 {
+    color: var(--azul-marino);
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin: 0;
+}
+
+#total-pagar {
+    color: var(--dorado-camel);
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* ========================================= */
+/* --- NUEVO: ESTILO PARA EL BOTÓN "COMPRAR AHORA" --- */
+/* ========================================= */
+.btn-comprar-ahora {
+    display: block;
+    text-align: center;
+    background: var(--azul-marino);
+    color: var(--blanco-puro);
+    border: 1px solid var(--azul-marino);
+    padding: 14px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.4s;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+.btn-comprar-ahora:hover {
+    background: var(--dorado-camel);
+    border-color: var(--dorado-camel);
     color: var(--azul-marino);
 }
