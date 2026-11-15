@@ -171,7 +171,7 @@
             if (user) {
                 // Si está logueado, el botón cambia a "Cerrar Sesión"
                 if(btnLogin) {
-                    btnLogin.innerText = "Cerrar Sesión (" + (user.displayName || 'Usuario') + ")";
+                   btnLogin.innerText = "Salir";
                     btnLogin.onclick = window.cerrarSesion;
                 }
 
