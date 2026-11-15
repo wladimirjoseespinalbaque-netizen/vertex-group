@@ -12,53 +12,40 @@ function cerrarBuscador() {
 function filtrarProductos() {
     let input = document.getElementById('input-busqueda').value.toLowerCase();
     let productos = document.querySelectorAll('.tarjeta-producto');
-
     productos.forEach(producto => {
         let nombre = producto.getAttribute('data-nombre').toLowerCase();
-        if (nombre.includes(input)) {
-            producto.style.display = 'block';
-        } else {
-            producto.style.display = 'none';
-        }
+        producto.style.display = nombre.includes(input) ? 'block' : 'none';
     });
 }
 
 function filtrarPorCategoria(categoria) {
     let productos = document.querySelectorAll('.tarjeta-producto');
     productos.forEach(producto => {
-        if (producto.getAttribute('data-categoria') === categoria) {
-            producto.style.display = 'block';
-        } else {
-            producto.style.display = 'none';
-        }
+        producto.style.display = (producto.getAttribute('data-categoria') === categoria) ? 'block' : 'none';
     });
     document.querySelector('.seccion-productos').scrollIntoView({ behavior: 'smooth' });
 }
 
-// --- MOVER EL CARRUSEL CON LAS FLECHAS ---
 function moverCarrusel(direccion) {
     const carrusel = document.getElementById('carrusel-productos');
-    const scrollAmount = 260 * direccion;
-    carrusel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    carrusel.scrollBy({ left: 260 * direccion, behavior: 'smooth' });
 }
 
-// Cerrar buscador con la tecla Escape
 document.addEventListener('keydown', function(event) {
-    if (event.key === "Escape") {
-        cerrarBuscador();
-    }
+    if (event.key === "Escape") cerrarBuscador();
 });
 
-// --- SISTEMA DE CARRITO DE COMPRAS ---
+// --- SISTEMA DE CARRITO ---
 
-function agregarAlCarrito(id, nombre, precio, imagen) {
+function agregarAlCarrito(id, nombre, precio, imagen, caracteristica) {
     let carrito = JSON.parse(localStorage.getItem('carritoVertex')) || [];
     let productoExistente = carrito.find(p => p.id === id);
 
     if (productoExistente) {
         productoExistente.cantidad += 1;
     } else {
-        carrito.push({ id, nombre, precio, imagen, cantidad: 1 });
+        let fecha = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+        carrito.push({ id, nombre, precio, imagen, cantidad: 1, caracteristica: caracteristica || 'Producto de calidad', fecha: fecha });
     }
 
     localStorage.setItem('carritoVertex', JSON.stringify(carrito));
@@ -73,7 +60,7 @@ function actualizarContadorCarrito() {
     if (contador) contador.innerText = totalItems;
 }
 
-function mostrarCarritoEnCheckout() {
+function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carritoVertex')) || [];
     const contenedor = document.getElementById('lista-carrito');
     const totalElemento = document.getElementById('total-pagar');
@@ -102,7 +89,9 @@ function mostrarCarritoEnCheckout() {
                 <img src="${p.imagen}" alt="${p.nombre}">
                 <div class="info-item">
                     <h4>${p.nombre}</h4>
-                    <p>$${p.precio.toFixed(2)} x ${p.cantidad}</p>
+                    <p style="font-size: 12px; color: #888; margin-bottom: 5px;">${p.caracteristica}</p>
+                    <p style="font-size: 12px; color: #aaa; margin-bottom: 5px;">Añadido: ${p.fecha}</p>
+                    <p style="font-weight: bold; color: var(--azul-marino);">$${p.precio.toFixed(2)} x ${p.cantidad}</p>
                 </div>
                 <button onclick="eliminarDelCarrito(${index})" class="btn-eliminar">✖</button>
             </div>
@@ -118,35 +107,35 @@ function eliminarDelCarrito(index) {
     let carrito = JSON.parse(localStorage.getItem('carritoVertex')) || [];
     carrito.splice(index, 1);
     localStorage.setItem('carritoVertex', JSON.stringify(carrito));
-    mostrarCarritoEnCheckout();
+    mostrarCarrito();
     actualizarContadorCarrito();
 }
 
-function vaciarCarrito() {
+function limpiarCarritoAlComprar() {
     localStorage.removeItem('carritoVertex');
 }
 
-// --- INICIALIZACIÓN Y LECTURA DE URL (Para Comprar Ahora) ---
+// --- INICIALIZACIÓN ---
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Revisar si venimos de un botón "Comprar Ahora"
+    // 1. Si venimos de "Comprar Ahora", inyectamos ese producto al carrito
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('producto') && urlParams.has('precio')) {
         let nombre = urlParams.get('producto');
         let precio = parseFloat(urlParams.get('precio').replace('$', ''));
-
-        // Creamos un carrito temporal solo con este producto
+        
         let carritoDirecto = [{
-            id: Date.now(), // ID único basado en el tiempo
+            id: Date.now(),
             nombre: nombre,
             precio: precio,
             imagen: 'img/audifonos_bluetooth.jpg', // Imagen por defecto
-            cantidad: 1
+            cantidad: 1,
+            caracteristica: 'Producto seleccionado',
+            fecha: new Date().toLocaleDateString('es-ES')
         }];
-
         localStorage.setItem('carritoVertex', JSON.stringify(carritoDirecto));
     }
 
-    // 2. Actualizar la interfaz
+    // 2. Mostrar carrito (en carrito.html o checkout.html) y actualizar contador
     actualizarContadorCarrito();
-    mostrarCarritoEnCheckout();
+    mostrarCarrito();
 });
