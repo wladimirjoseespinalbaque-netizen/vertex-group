@@ -125,6 +125,85 @@
         <p>© 2026 Vertex Store - Parte de Vertex Group</p>
     </footer>
 
+        <!-- SCRIPTS DE FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        // Tus credenciales
+        const firebaseConfig = {
+            apiKey: "AIzaSyAixgfedj6V6IQFTg8oU1uDPoKccIYwVc4",
+            authDomain: "vertex-store-a3b93.firebaseapp.com",
+            projectId: "vertex-store-a3b93",
+            storageBucket: "vertex-store-a3b93.firebasestorage.app",
+            messagingSenderId: "160958489434",
+            appId: "1:160958489434:web:51573d5d8e1ba43aa14963"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        // 1. Botón de Iniciar Sesión
+        window.loginConGoogle = () => {
+            signInWithPopup(auth, provider).then(() => {
+                alert("¡Sesión iniciada! Tu carrito se sincronizará.");
+            }).catch((error) => alert("Error: " + error.message));
+        };
+
+        // 2. Botón de Cerrar Sesión
+        window.cerrarSesion = () => {
+            signOut(auth).then(() => {
+                alert("Sesión cerrada.");
+                localStorage.removeItem('carritoVertex');
+                window.location.reload();
+            });
+        };
+
+        // 3. Sincronización en Tiempo Real
+        let unsubscribe = null;
+        onAuthStateChanged(auth, (user) => {
+            const btnLogin = document.getElementById('btn-login');
+            
+            if (user) {
+                // Si está logueado, el botón cambia a "Cerrar Sesión"
+                if(btnLogin) {
+                    btnLogin.innerText = "Cerrar Sesión (" + (user.displayName || 'Usuario') + ")";
+                    btnLogin.onclick = window.cerrarSesion;
+                }
+
+                // Escuchar cambios en la nube
+                const cartRef = doc(db, "carts", user.uid);
+                unsubscribe = onSnapshot(cartRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        localStorage.setItem('carritoVertex', JSON.stringify(docSnap.data().items));
+                    } else {
+                        localStorage.setItem('carritoVertex', JSON.stringify([]));
+                    }
+                    // Refrescar la vista
+                    if (typeof actualizarContadorCarrito === 'function') actualizarContadorCarrito();
+                    if (typeof mostrarCarrito === 'function') mostrarCarrito();
+                });
+            } else {
+                // Si no está logueado, botón normal
+                if(btnLogin) {
+                    btnLogin.innerText = "👤 Iniciar Sesión";
+                    btnLogin.onclick = window.loginConGoogle;
+                }
+                if (unsubscribe) unsubscribe();
+                if (typeof actualizarContadorCarrito === 'function') actualizarContadorCarrito();
+            }
+        });
+
+        // 4. Función para guardar en la nube
+        window.guardarCarritoNube = async (carrito) => {
+            if (auth.currentUser) {
+                await setDoc(doc(db, "carts", auth.currentUser.uid), { items: carrito });
+            }
+        };
+    </script>
     <script src="store.js"></script>
 </body>
 </html>
