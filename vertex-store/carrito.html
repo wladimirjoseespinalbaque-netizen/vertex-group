@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito | Vertex Store</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <header class="header-tienda">
+        <div class="logo">
+            <a href="../index.html" style="text-decoration:none; color:#111;">
+                <span style="color:#0056b3; font-weight:900;">V</span>ERTEX <span style="color:#666; font-weight:300;">STORE</span>
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">← Seguir Comprando</a>
+        </nav>
+    </header>
+
+    <div class="checkout-container" style="max-width: 800px;">
+        <h2>Mi Carrito de Compras</h2>
+
+        <!-- Aquí se muestran los productos -->
+        <div id="lista-carrito" class="resumen-carrito" style="max-height: none;"></div>
+        
+        <div class="total-container">
+            <h3>Total:</h3>
+            <h3 id="total-pagar">$0.00</h3>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="checkout.html" class="btn-pagar" style="text-decoration: none; display: block;">Proceder al Pago</a>
+        </div>
+    </div>
+
+    <script src="store.js"></script>
+</body>
+</html>
