@@ -52,25 +52,45 @@ body {
 }
 .header-tienda nav a:hover { color: var(--dorado-camel); }
 
-/* --- BOTÓN DE BÚSQUEDA (Elegante, sin emojis) --- */
-.btn-search {
+/* --- NUEVOS ESTILOS UNIFICADOS PARA LOS BOTONES DEL HEADER --- */
+.btn-search, .btn-carrito, .btn-login {
     background: var(--azul-marino);
     color: var(--blanco-puro);
     border: 1px solid var(--azul-marino);
-    padding: 12px 30px;
+    padding: 0 25px; /* Padding horizontal para que respiren */
+    height: 42px; /* Altura fija para que todos midan igual */
     border-radius: 2px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
     transition: 0.3s;
     font-family: 'Montserrat', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
 }
+
+/* El carrito y el login tienen fondo transparente por defecto */
+.btn-carrito, .btn-login {
+    background: transparent;
+    color: var(--azul-marino);
+}
+
+/* Efectos Hover */
 .btn-search:hover {
     background: transparent;
     color: var(--azul-marino);
 }
+
+.btn-carrito:hover, .btn-login:hover {
+    background: var(--azul-marino);
+    color: var(--blanco-puro);
+}
+/* ------------------------------------------------------------- */
 
 /* --- HERO --- */
 .hero-store {
@@ -369,27 +389,8 @@ body {
 }
 
 /* ========================================= */
-/* --- NUEVOS ESTILOS PARA EL CARRITO --- */
+/* --- ESTILOS PARA EL CARRITO --- */
 /* ========================================= */
-
-/* Botón del carrito en la cabecera */
-.btn-carrito {
-    background: transparent;
-    color: var(--azul-marino);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border: 1px solid var(--azul-marino);
-    padding: 12px 20px;
-    border-radius: 2px;
-    transition: 0.3s;
-}
-.btn-carrito:hover {
-    background: var(--azul-marino);
-    color: var(--blanco-puro);
-}
 
 /* Resumen del carrito en la página de Checkout */
 .resumen-carrito {
@@ -479,7 +480,7 @@ body {
 }
 
 /* ========================================= */
-/* --- NUEVO: ESTILO PARA EL BOTÓN "COMPRAR AHORA" --- */
+/* --- ESTILO PARA EL BOTÓN "COMPRAR AHORA" --- */
 /* ========================================= */
 .btn-comprar-ahora {
     display: block;
