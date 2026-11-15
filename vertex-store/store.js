@@ -50,6 +50,12 @@ function agregarAlCarrito(id, nombre, precio, imagen, caracteristica) {
 
     localStorage.setItem('carritoVertex', JSON.stringify(carrito));
     actualizarContadorCarrito();
+    
+    // NUEVO: Guardar en la nube si está logueado
+    if (typeof window.guardarCarritoNube === 'function') {
+        window.guardarCarritoNube(carrito);
+    }
+    
     alert(`¡${nombre} añadido al carrito!`);
 }
 
@@ -109,10 +115,20 @@ function eliminarDelCarrito(index) {
     localStorage.setItem('carritoVertex', JSON.stringify(carrito));
     mostrarCarrito();
     actualizarContadorCarrito();
+
+    // NUEVO: Guardar en la nube si está logueado
+    if (typeof window.guardarCarritoNube === 'function') {
+        window.guardarCarritoNube(carrito);
+    }
 }
 
 function limpiarCarritoAlComprar() {
     localStorage.removeItem('carritoVertex');
+    
+    // NUEVO: Vaciar en la nube si está logueado
+    if (typeof window.guardarCarritoNube === 'function') {
+        window.guardarCarritoNube([]);
+    }
 }
 
 // --- INICIALIZACIÓN ---
