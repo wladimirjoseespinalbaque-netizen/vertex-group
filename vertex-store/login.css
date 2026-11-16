@@ -1,11 +1,43 @@
+/* ========================================= */
 /* --- ESTILOS PARA LA PÁGINA DE LOGIN --- */
+/* ========================================= */
+
+/* Fondo y centrado */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Resta la altura del header */
+    padding: 20px;
+    background: var(--fondo-crema);
+}
+
+/* La tarjeta blanca */
+.auth-card {
+    background: var(--blanco-puro);
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-card h2 {
+    color: var(--azul-marino);
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* Botón de Google */
 .btn-google {
     width: 100%;
     background: white;
     color: #333;
     border: 1px solid #ddd;
-    padding: 14px;
-    border-radius: 2px;
+    padding: 12px;
+    border-radius: 4px;
     font-weight: 600;
     font-size: 14px;
     display: flex;
@@ -14,7 +46,6 @@
     gap: 10px;
     cursor: pointer;
     transition: 0.3s;
-    margin-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
 }
 .btn-google:hover {
@@ -26,9 +57,10 @@
     height: 20px;
 }
 
+/* Divisor con texto en el medio */
 .divisor {
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eaeaea;
     line-height: 0.1em;
     margin: 30px 0;
 }
@@ -39,9 +71,10 @@
     font-size: 13px;
 }
 
+/* Enlace inferior */
 .toggle-auth {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 14px;
     color: var(--gris-texto);
 }
@@ -52,4 +85,69 @@
 }
 .toggle-auth a:hover {
     text-decoration: underline;
+}
+
+/* ========================================= */
+/* --- ESTILOS MODERNOS PARA EL FORMULARIO --- */
+/* ========================================= */
+
+/* Espaciado de los campos */
+.auth-card .form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Para que las etiquetas se alineen a la izquierda */
+}
+
+/* Etiquetas (Correo, Contraseña) */
+.auth-card .form-group label {
+    display: block;
+    color: var(--azul-marino);
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Los campos de texto (Inputs) */
+.auth-card .form-group input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gris-texto);
+    background-color: #fafafa;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Efecto al hacer clic en el campo (Focus) */
+.auth-card .form-group input:focus {
+    border-color: var(--azul-marino);
+    background-color: var(--blanco-puro);
+    box-shadow: 0 0 0 3px rgba(11, 32, 70, 0.1); /* Un halo azul marino elegante */
+}
+
+/* Botón de Entrar/Registrarme */
+.auth-card .btn-pagar {
+    width: 100%;
+    padding: 15px;
+    background: var(--azul-marino);
+    color: var(--blanco-puro);
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.auth-card .btn-pagar:hover {
+    background: var(--dorado-camel);
+    color: var(--azul-marino);
 }
