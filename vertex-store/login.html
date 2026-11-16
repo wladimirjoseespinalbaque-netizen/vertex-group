@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Vertex Store</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <header class="header-tienda">
+        <div class="logo">
+            <a href="../index.html" style="text-decoration:none; color:#111;">
+                <span style="color:#0056b3; font-weight:900;">V</span>ERTEX <span style="color:#666; font-weight:300;">STORE</span>
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">← Volver a la Tienda</a>
+        </nav>
+    </header>
+
+    <div class="checkout-container" style="margin-top: 100px;">
+        <h2 id="titulo-auth">Iniciar Sesión</h2>
+
+        <!-- Botón de Google -->
+        <button id="btn-google" class="btn-google">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+            Continuar con Google
+        </button>
+
+        <div class="divisor">
+            <span>O ingresa con tu correo</span>
+        </div>
+
+        <!-- Formulario de Email/Contraseña -->
+        <form id="form-auth">
+            <div class="form-group">
+                <label>Correo Electrónico:</label>
+                <input type="email" id="email" required placeholder="Ej: correo@ejemplo.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input type="password" id="password" required placeholder="Mínimo 6 caracteres">
+            </div>
+            
+            <button type="submit" class="btn-pagar" id="btn-submit">Entrar</button>
+        </form>
+
+        <!-- Enlace para cambiar entre Login y Registro -->
+        <p class="toggle-auth">
+            <span id="texto-toggle">¿No tienes cuenta?</span> 
+            <a href="#" id="link-toggle">Regístrate aquí</a>
+        </p>
+    </div>
+
+    <!-- Script de Autenticación -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAixgfedj6V6IQFTg8oU1uDPoKccIYwVc4",
+            authDomain: "vertex-store-a3b93.firebaseapp.com",
+            projectId: "vertex-store-a3b93",
+            storageBucket: "vertex-store-a3b93.firebasestorage.app",
+            messagingSenderId: "160958489434",
+            appId: "1:160958489434:web:51573d5d8e1ba43aa14963"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Si ya está logueado, lo mandamos a la tienda
+        onAuthStateChanged(auth, (user) => {
+            if (user) window.location.href = "index.html";
+        });
+
+        // Lógica para mostrar Login o Registro
+        let esRegistro = false;
+        const titulo = document.getElementById('titulo-auth');
+        const btnSubmit = document.getElementById('btn-submit');
+        const textoToggle = document.getElementById('texto-toggle');
+        const linkToggle = document.getElementById('link-toggle');
+
+        linkToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            esRegistro = !esRegistro;
+            if (esRegistro) {
+                titulo.innerText = "Crear Cuenta";
+                btnSubmit.innerText = "Registrarme";
+                textoToggle.innerText = "¿Ya tienes cuenta?";
+                linkToggle.innerText = "Inicia sesión";
+            } else {
+                titulo.innerText = "Iniciar Sesión";
+                btnSubmit.innerText = "Entrar";
+                textoToggle.innerText = "¿No tienes cuenta?";
+                linkToggle.innerText = "Regístrate aquí";
+            }
+        });
+
+        // Login con Google
+        document.getElementById('btn-google').addEventListener('click', () => {
+            signInWithPopup(auth, provider).catch(error => alert(error.message));
+        });
+
+        // Login/Registro con Email
+        document.getElementById('form-auth').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (esRegistro) {
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then(() => window.location.href = "index.html")
+                    .catch(error => alert("Error al registrar: " + error.message));
+            } else {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then(() => window.location.href = "index.html")
+                    .catch(error => alert("Error al iniciar sesión: " + error.message));
+            }
+        });
+    </script>
+</body>
+</html>
