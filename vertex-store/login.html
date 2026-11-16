@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión | Vertex Store</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
@@ -20,10 +21,12 @@
         </nav>
     </header>
 
-    <!-- Contenedor centrado -->
     <div class="auth-wrapper">
         <div class="auth-card">
             <h2 id="titulo-auth">Iniciar Sesión</h2>
+
+            <!-- LETRERO DE ERROR ELEGANTE (Oculto por defecto) -->
+            <div id="mensaje-error" class="error-box"></div>
 
             <!-- Botón de Google -->
             <button id="btn-google" class="btn-google">
@@ -35,7 +38,6 @@
                 <span>O ingresa con tu correo</span>
             </div>
 
-            <!-- Formulario de Email/Contraseña -->
             <form id="form-auth">
                 <div class="form-group">
                     <label>Correo Electrónico:</label>
@@ -43,13 +45,15 @@
                 </div>
                 <div class="form-group">
                     <label>Contraseña:</label>
-                    <input type="password" id="password" required placeholder="Mínimo 6 caracteres">
+                    <div class="password-wrapper">
+                        <input type="password" id="password" required placeholder="Mínimo 6 caracteres">
+                        <button type="button" id="toggle-password" class="btn-toggle-password">👁️</button>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-pagar" id="btn-submit" style="margin-top: 15px;">Entrar</button>
+                <button type="submit" class="btn-pagar" id="btn-submit">Entrar</button>
             </form>
 
-            <!-- Enlace para cambiar entre Login y Registro -->
             <p class="toggle-auth">
                 <span id="texto-toggle">¿No tienes cuenta?</span>
                 <a href="#" id="link-toggle">Regístrate aquí</a>
@@ -75,6 +79,25 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
+        const errorBox = document.getElementById('mensaje-error');
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('toggle-password');
+
+        // Ocultar el error cuando el usuario empieza a escribir
+        document.getElementById('email').addEventListener('input', () => errorBox.style.display = 'none');
+        passwordInput.addEventListener('input', () => errorBox.style.display = 'none');
+
+        // Lógica para mostrar/ocultar contraseña (El ojito)
+        toggleBtn.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.innerText = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.innerText = '👁️';
+            }
+        });
+
         // Si ya está logueado, lo mandamos a la tienda
         onAuthStateChanged(auth, (user) => {
             if (user) window.location.href = "index.html";
@@ -89,6 +112,7 @@
 
         linkToggle.addEventListener('click', (e) => {
             e.preventDefault();
+            errorBox.style.display = 'none'; // Limpiar errores al cambiar de modo
             esRegistro = !esRegistro;
             if (esRegistro) {
                 titulo.innerText = "Crear Cuenta";
@@ -103,9 +127,13 @@
             }
         });
 
-        // Login con Google
+        // Login con Google (Ocultando el error feo si cierran la ventana)
         document.getElementById('btn-google').addEventListener('click', () => {
-            signInWithPopup(auth, provider).catch(error => alert(error.message));
+            signInWithPopup(auth, provider).catch(error => {
+                if (error.code !== 'auth/popup-closed-by-user') {
+                    mostrarError("Hubo un problema con Google. Intenta de nuevo.");
+                }
+            });
         });
 
         // Login/Registro con Email
@@ -117,13 +145,34 @@
             if (esRegistro) {
                 createUserWithEmailAndPassword(auth, email, password)
                     .then(() => window.location.href = "index.html")
-                    .catch(error => alert("Error al registrar: " + error.message));
+                    .catch(error => {
+                        if (error.code === 'auth/email-already-in-use') {
+                            mostrarError("Este correo ya está registrado. Por favor, inicia sesión.");
+                        } else if (error.code === 'auth/weak-password') {
+                            mostrarError("La contraseña es muy débil. Debe tener al menos 6 caracteres.");
+                        } else {
+                            mostrarError("Error al registrar: " + error.message);
+                        }
+                    });
             } else {
                 signInWithEmailAndPassword(auth, email, password)
                     .then(() => window.location.href = "index.html")
-                    .catch(error => alert("Error al iniciar sesión: " + error.message));
+                    .catch(error => {
+                        // Firebase usa 'auth/invalid-credential' para correo no existe o mala contraseña
+                        if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                            mostrarError("Correo o contraseña incorrectos. Si no tienes cuenta, regístrate primero.");
+                        } else {
+                            mostrarError("Error al iniciar sesión. Intenta de nuevo.");
+                        }
+                    });
             }
         });
+
+        // Función para pintar el letrero de error bonito
+        function mostrarError(mensaje) {
+            errorBox.innerHTML = `<strong>¡Ups!</strong> ${mensaje}`;
+            errorBox.style.display = 'block';
+        }
     </script>
 </body>
 </html>
