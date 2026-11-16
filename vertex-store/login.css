@@ -1,0 +1,55 @@
+/* --- ESTILOS PARA LA PÁGINA DE LOGIN --- */
+.btn-google {
+    width: 100%;
+    background: white;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 14px;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+.btn-google:hover {
+    background: #f1f1f1;
+    border-color: #ccc;
+}
+.btn-google img {
+    width: 20px;
+    height: 20px;
+}
+
+.divisor {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    line-height: 0.1em;
+    margin: 30px 0;
+}
+.divisor span {
+    background: var(--blanco-puro);
+    padding: 0 15px;
+    color: #999;
+    font-size: 13px;
+}
+
+.toggle-auth {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--gris-texto);
+}
+.toggle-auth a {
+    color: var(--dorado-camel);
+    font-weight: 600;
+    text-decoration: none;
+}
+.toggle-auth a:hover {
+    text-decoration: underline;
+}
