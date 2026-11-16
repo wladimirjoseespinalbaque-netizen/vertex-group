@@ -25,7 +25,7 @@
         <div class="auth-card">
             <h2 id="titulo-auth">Iniciar Sesión</h2>
 
-            <!-- LETRERO DE ERROR ELEGANTE (Oculto por defecto) -->
+            <!-- LETRERO DE ERROR / ÉXITO -->
             <div id="mensaje-error" class="error-box"></div>
 
             <!-- Botón de Google -->
@@ -34,7 +34,7 @@
                 Continuar con Google
             </button>
 
-            <div class="divisor">
+            <div class="divisor" id="divisor-google">
                 <span>O ingresa con tu correo</span>
             </div>
 
@@ -43,18 +43,21 @@
                     <label>Correo Electrónico:</label>
                     <input type="email" id="email" required placeholder="Ej: correo@ejemplo.com">
                 </div>
-                <div class="form-group">
+                
+                <!-- Campo de contraseña (se oculta en modo recuperación) -->
+                <div class="form-group" id="grupo-password">
                     <label>Contraseña:</label>
                     <div class="password-wrapper">
                         <input type="password" id="password" required placeholder="Mínimo 6 caracteres">
                         <button type="button" id="toggle-password" class="btn-toggle-password">👁️</button>
                     </div>
+                    <a href="#" id="link-forgot" style="display: block; text-align: right; font-size: 12px; color: var(--dorado-camel); margin-top: 5px; text-decoration: none;">¿Olvidaste tu contraseña?</a>
                 </div>
 
                 <button type="submit" class="btn-pagar" id="btn-submit">Entrar</button>
             </form>
 
-            <p class="toggle-auth">
+            <p class="toggle-auth" id="zona-toggle">
                 <span id="texto-toggle">¿No tienes cuenta?</span>
                 <a href="#" id="link-toggle">Regístrate aquí</a>
             </p>
@@ -64,7 +67,7 @@
     <!-- Script de Autenticación -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAixgfedj6V6IQFTg8oU1uDPoKccIYwVc4",
@@ -79,15 +82,27 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
+        // Elementos
         const errorBox = document.getElementById('mensaje-error');
         const passwordInput = document.getElementById('password');
         const toggleBtn = document.getElementById('toggle-password');
+        const titulo = document.getElementById('titulo-auth');
+        const btnSubmit = document.getElementById('btn-submit');
+        const textoToggle = document.getElementById('texto-toggle');
+        const linkToggle = document.getElementById('link-toggle');
+        const linkForgot = document.getElementById('link-forgot');
+        const grupoPassword = document.getElementById('grupo-password');
+        const btnGoogle = document.getElementById('btn-google');
+        const divisorGoogle = document.getElementById('divisor-google');
 
-        // Ocultar el error cuando el usuario empieza a escribir
+        // Estado
+        let modo = 'login'; // 'login', 'registro', 'recuperacion'
+
+        // Ocultar errores al escribir
         document.getElementById('email').addEventListener('input', () => errorBox.style.display = 'none');
         passwordInput.addEventListener('input', () => errorBox.style.display = 'none');
 
-        // Lógica para mostrar/ocultar contraseña (El ojito)
+        // Ojito de la contraseña
         toggleBtn.addEventListener('click', () => {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -98,37 +113,66 @@
             }
         });
 
-        // Si ya está logueado, lo mandamos a la tienda
+        // Si ya está logueado, a la tienda
         onAuthStateChanged(auth, (user) => {
             if (user) window.location.href = "index.html";
         });
 
-        // Lógica para mostrar Login o Registro
-        let esRegistro = false;
-        const titulo = document.getElementById('titulo-auth');
-        const btnSubmit = document.getElementById('btn-submit');
-        const textoToggle = document.getElementById('texto-toggle');
-        const linkToggle = document.getElementById('link-toggle');
+        // Función para cambiar la vista
+        function cambiarModo(nuevoModo) {
+            modo = nuevoModo;
+            errorBox.style.display = 'none';
+            document.getElementById('form-auth').reset();
 
-        linkToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            errorBox.style.display = 'none'; // Limpiar errores al cambiar de modo
-            esRegistro = !esRegistro;
-            if (esRegistro) {
-                titulo.innerText = "Crear Cuenta";
-                btnSubmit.innerText = "Registrarme";
-                textoToggle.innerText = "¿Ya tienes cuenta?";
-                linkToggle.innerText = "Inicia sesión";
-            } else {
+            if (modo === 'login') {
                 titulo.innerText = "Iniciar Sesión";
                 btnSubmit.innerText = "Entrar";
                 textoToggle.innerText = "¿No tienes cuenta?";
                 linkToggle.innerText = "Regístrate aquí";
+                grupoPassword.style.display = "block";
+                passwordInput.required = true;
+                btnGoogle.style.display = "flex";
+                divisorGoogle.style.display = "block";
+                linkForgot.style.display = "block";
+            } 
+            else if (modo === 'registro') {
+                titulo.innerText = "Crear Cuenta";
+                btnSubmit.innerText = "Registrarme";
+                textoToggle.innerText = "¿Ya tienes cuenta?";
+                linkToggle.innerText = "Inicia sesión";
+                grupoPassword.style.display = "block";
+                passwordInput.required = true;
+                btnGoogle.style.display = "flex";
+                divisorGoogle.style.display = "block";
+                linkForgot.style.display = "none";
+            } 
+            else if (modo === 'recuperacion') {
+                titulo.innerText = "Recuperar Contraseña";
+                btnSubmit.innerText = "Enviar Enlace Seguro";
+                textoToggle.innerText = "¿Recordaste tu contraseña?";
+                linkToggle.innerText = "Volver a Iniciar Sesión";
+                grupoPassword.style.display = "none";
+                passwordInput.required = false;
+                btnGoogle.style.display = "none";
+                divisorGoogle.style.display = "none";
             }
+        }
+
+        // Botón de Login/Registro
+        linkToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (modo === 'login') cambiarModo('registro');
+            else cambiarModo('login');
         });
 
-        // Login con Google (Ocultando el error feo si cierran la ventana)
-        document.getElementById('btn-google').addEventListener('click', () => {
+        // Botón de Olvidé mi contraseña
+        linkForgot.addEventListener('click', (e) => {
+            e.preventDefault();
+            cambiarModo('recuperacion');
+        });
+
+        // Botón de Google
+        btnGoogle.addEventListener('click', () => {
             signInWithPopup(auth, provider).catch(error => {
                 if (error.code !== 'auth/popup-closed-by-user') {
                     mostrarError("Hubo un problema con Google. Intenta de nuevo.");
@@ -136,13 +180,13 @@
             });
         });
 
-        // Login/Registro con Email
+        // Enviar Formulario
         document.getElementById('form-auth').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            if (esRegistro) {
+            if (modo === 'registro') {
                 createUserWithEmailAndPassword(auth, email, password)
                     .then(() => window.location.href = "index.html")
                     .catch(error => {
@@ -151,14 +195,14 @@
                         } else if (error.code === 'auth/weak-password') {
                             mostrarError("La contraseña es muy débil. Debe tener al menos 6 caracteres.");
                         } else {
-                            mostrarError("Error al registrar: " + error.message);
+                            mostrarError("Error al registrar. Intenta de nuevo.");
                         }
                     });
-            } else {
+            } 
+            else if (modo === 'login') {
                 signInWithEmailAndPassword(auth, email, password)
                     .then(() => window.location.href = "index.html")
                     .catch(error => {
-                        // Firebase usa 'auth/invalid-credential' para correo no existe o mala contraseña
                         if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                             mostrarError("Correo o contraseña incorrectos. Si no tienes cuenta, regístrate primero.");
                         } else {
@@ -166,10 +210,28 @@
                         }
                     });
             }
+            else if (modo === 'recuperacion') {
+                sendPasswordResetEmail(auth, email)
+                    .then(() => {
+                        errorBox.className = 'success-box'; // Cambia a verde
+                        errorBox.innerHTML = `<strong>¡Correo Enviado!</strong> Hemos enviado un enlace mágico a <b>${email}</b>. Revisa tu bandeja de entrada (y la carpeta de Spam) para crear tu nueva contraseña.`;
+                        errorBox.style.display = 'block';
+                    })
+                    .catch(error => {
+                        errorBox.className = 'error-box';
+                        if (error.code === 'auth/user-not-found') {
+                            mostrarError("No existe ninguna cuenta asociada a este correo.");
+                        } else if (error.code === 'auth/invalid-email') {
+                            mostrarError("El formato del correo no es válido.");
+                        } else {
+                            mostrarError("Error al enviar el correo. Intenta de nuevo.");
+                        }
+                    });
+            }
         });
 
-        // Función para pintar el letrero de error bonito
         function mostrarError(mensaje) {
+            errorBox.className = 'error-box';
             errorBox.innerHTML = `<strong>¡Ups!</strong> ${mensaje}`;
             errorBox.style.display = 'block';
         }
