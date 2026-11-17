@@ -504,3 +504,87 @@ body {
     border-color: var(--dorado-camel);
     color: var(--azul-marino);
 }
+
+/* ========================================= */
+/* --- DISEÑO RESPONSIVE PARA CELULARES --- */
+/* ========================================= */
+@media (max-width: 768px) {
+    /* 1. Arreglar el Menú (Header) */
+    .header-tienda {
+        flex-direction: column; /* Pone el logo arriba y el menú abajo */
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .header-tienda nav {
+        flex-wrap: wrap; /* Permite que los botones se acomoden en filas */
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Hacemos los botones más pequeños y proporcionados */
+    .btn-search, .btn-carrito, .btn-login {
+        font-size: 11px;
+        padding: 8px 15px;
+        height: 38px; 
+    }
+    
+    /* Ocultamos los enlaces de texto largos para que no ocupen espacio */
+    .header-tienda nav a:not(.btn-carrito):not(.btn-login) {
+        display: none; 
+    }
+
+    /* 2. Arreglar el Título de Bienvenida (Hero) */
+    .hero-store {
+        padding: 60px 15px;
+    }
+
+    .hero-store h1 {
+        font-size: 36px; /* Letra más pequeña para celular */
+        line-height: 1.2;
+    }
+
+    .hero-store p {
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Arreglar las Categorías */
+    .seccion-categorias {
+        margin: 40px auto;
+    }
+
+    .titulo-seccion {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .grid-categorias {
+        grid-template-columns: 1fr; /* Una categoría por fila */
+        gap: 15px;
+    }
+    
+    .tarjeta-categoria {
+        padding: 30px 20px; /* Menos espacio interno */
+    }
+
+    /* 4. Arreglar el Carrusel de Productos */
+    .carrusel {
+        gap: 15px;
+    }
+    
+    .tarjeta-producto {
+        min-width: 240px; /* Tarjetas un poco más angostas */
+        padding: 15px;
+    }
+    
+    .img-producto {
+        height: 180px; /* Imagen un poco más pequeña */
+    }
+
+    /* Ocultamos las flechas en celular porque se desliza con el dedo */
+    .flecha-carrusel {
+        display: none; 
+    }
+}
