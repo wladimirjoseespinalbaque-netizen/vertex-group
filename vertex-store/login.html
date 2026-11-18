@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="login.css">
+    <!-- Script de OneSignal -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 </head>
 <body>
 
@@ -34,6 +36,16 @@
                 Continuar con Google
             </button>
 
+            <!-- CAJA DE NOTIFICACIONES (OneSignal) -->
+            <div id="caja-notificaciones" class="notificacion-box" onclick="pedirPermisoNotificaciones()">
+                <div class="icono-noti">🔔</div>
+                <div class="texto-noti">
+                    <h4>¡Entérate de todo primero!</h4>
+                    <p>Activa las notificaciones para recibir ofertas relámpago y nuevos productos.</p>
+                </div>
+                <div id="estado-noti" class="estado-noti"></div>
+            </div>
+
             <div class="divisor" id="divisor-google">
                 <span>O ingresa con tu correo</span>
             </div>
@@ -43,8 +55,7 @@
                     <label>Correo Electrónico:</label>
                     <input type="email" id="email" required placeholder="Ej: correo@ejemplo.com">
                 </div>
-                
-                <!-- Campo de contraseña (se oculta en modo recuperación) -->
+
                 <div class="form-group" id="grupo-password">
                     <label>Contraseña:</label>
                     <div class="password-wrapper">
@@ -64,7 +75,46 @@
         </div>
     </div>
 
-    <!-- Script de Autenticación -->
+    <!-- Script de OneSignal y Lógica de Notificaciones -->
+    <script>
+        // INICIALIZACIÓN DE ONESIGNAL
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+                appId: "PON_TU_APP_ID_AQUI", // ⚠️ AQUÍ VA TU APP ID DE ONESIGNAL
+                notifyButton: { enable: false }, // Ocultamos el botón por defecto, usaremos el nuestro
+            });
+
+            // Revisar si ya dio permiso antes
+            const permission = await OneSignal.Notifications.permission;
+            actualizarUINotificaciones(permission);
+        });
+
+        // Función que se ejecuta al tocar la caja
+        async function pedirPermisoNotificaciones() {
+            const permission = await OneSignal.Notifications.requestPermission();
+            actualizarUINotificaciones(permission);
+        }
+
+        // Cambiar el diseño de la caja según la respuesta del cliente
+        function actualizarUINotificaciones(permission) {
+            const caja = document.getElementById('caja-notificaciones');
+            const estado = document.getElementById('estado-noti');
+
+            if (permission === true) {
+                caja.classList.add('activo');
+                estado.innerHTML = '✅';
+                caja.onclick = null; // Desactivar el clic
+            } else if (permission === false) {
+                caja.classList.add('denegado');
+                estado.innerHTML = '❌';
+                caja.querySelector('p').innerText = "Has bloqueado las notificaciones. Actívalas en los ajustes de tu navegador si cambias de opinión.";
+                caja.onclick = null;
+            }
+        }
+    </script>
+
+    <!-- Script de Autenticación (Firebase) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
@@ -94,9 +144,10 @@
         const grupoPassword = document.getElementById('grupo-password');
         const btnGoogle = document.getElementById('btn-google');
         const divisorGoogle = document.getElementById('divisor-google');
+        const cajaNoti = document.getElementById('caja-notificaciones');
 
         // Estado
-        let modo = 'login'; // 'login', 'registro', 'recuperacion'
+        let modo = 'login';
 
         // Ocultar errores al escribir
         document.getElementById('email').addEventListener('input', () => errorBox.style.display = 'none');
@@ -134,7 +185,8 @@
                 btnGoogle.style.display = "flex";
                 divisorGoogle.style.display = "block";
                 linkForgot.style.display = "block";
-            } 
+                cajaNoti.style.display = "flex"; // Mostrar caja en login
+            }
             else if (modo === 'registro') {
                 titulo.innerText = "Crear Cuenta";
                 btnSubmit.innerText = "Registrarme";
@@ -145,7 +197,8 @@
                 btnGoogle.style.display = "flex";
                 divisorGoogle.style.display = "block";
                 linkForgot.style.display = "none";
-            } 
+                cajaNoti.style.display = "flex"; // Mostrar caja en registro
+            }
             else if (modo === 'recuperacion') {
                 titulo.innerText = "Recuperar Contraseña";
                 btnSubmit.innerText = "Enviar Enlace Seguro";
@@ -155,6 +208,7 @@
                 passwordInput.required = false;
                 btnGoogle.style.display = "none";
                 divisorGoogle.style.display = "none";
+                cajaNoti.style.display = "none"; // Ocultar en recuperación
             }
         }
 
@@ -198,7 +252,7 @@
                             mostrarError("Error al registrar. Intenta de nuevo.");
                         }
                     });
-            } 
+            }
             else if (modo === 'login') {
                 signInWithEmailAndPassword(auth, email, password)
                     .then(() => window.location.href = "index.html")
@@ -213,7 +267,7 @@
             else if (modo === 'recuperacion') {
                 sendPasswordResetEmail(auth, email)
                     .then(() => {
-                        errorBox.className = 'success-box'; // Cambia a verde
+                        errorBox.className = 'success-box';
                         errorBox.innerHTML = `<strong>¡Correo Enviado!</strong> Hemos enviado un enlace mágico a <b>${email}</b>. Revisa tu bandeja de entrada (y la carpeta de Spam) para crear tu nueva contraseña.`;
                         errorBox.style.display = 'block';
                     })
