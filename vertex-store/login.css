@@ -218,3 +218,76 @@
     background: var(--dorado-camel);
     color: var(--azul-marino);
 }
+/* ========================================= */
+/* --- CAJA DE NOTIFICACIONES ONESIGNAL --- */
+/* ========================================= */
+.notificacion-box {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.notificacion-box:hover {
+    border-color: var(--dorado-camel);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.notificacion-box.activo {
+    background: #e8f5e9;
+    border-color: #2e7d32;
+    cursor: default;
+}
+
+.notificacion-box.denegado {
+    background: #fff3f3;
+    border-color: #d32f2f;
+    cursor: default;
+}
+
+.icono-noti {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.texto-noti {
+    flex: 1;
+}
+
+.texto-noti h4 {
+    margin: 0 0 5px 0;
+    color: var(--azul-marino);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.texto-noti p {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.4;
+}
+
+.estado-noti {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .notificacion-box {
+        padding: 12px;
+    }
+    .texto-noti h4 {
+        font-size: 13px;
+    }
+    .texto-noti p {
+        font-size: 11px;
+    }
+}
