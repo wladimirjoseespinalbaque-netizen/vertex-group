@@ -27,23 +27,23 @@
         <div class="auth-card">
             <h2 id="titulo-auth">Iniciar Sesión</h2>
 
-            <!-- LETRERO DE ERROR / ÉXITO -->
             <div id="mensaje-error" class="error-box"></div>
 
-            <!-- Botón de Google -->
             <button id="btn-google" class="btn-google">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
                 Continuar con Google
             </button>
 
-            <!-- CAJA DE NOTIFICACIONES (OneSignal) -->
-            <div id="caja-notificaciones" class="notificacion-box" onclick="pedirPermisoNotificaciones()">
-                <div class="icono-noti">🔔</div>
-                <div class="texto-noti">
-                    <h4>¡Entérate de todo primero!</h4>
-                    <p>Activa las notificaciones para recibir ofertas relámpago y nuevos productos.</p>
-                </div>
-                <div id="estado-noti" class="estado-noti"></div>
+            <!-- NUEVA CAJA DE NOTIFICACIONES CON CHECKBOX -->
+            <div class="notificacion-box" id="caja-noti">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="check-notificaciones">
+                    <span class="checkmark"></span>
+                    <div class="texto-noti">
+                        <h4>¡Entérate de todo primero!</h4>
+                        <p>Marca esta casilla para recibir ofertas relámpago y nuevos productos.</p>
+                    </div>
+                </label>
             </div>
 
             <div class="divisor" id="divisor-google">
@@ -77,41 +77,38 @@
 
     <!-- Script de OneSignal y Lógica de Notificaciones -->
     <script>
-        // INICIALIZACIÓN DE ONESIGNAL
         window.OneSignalDeferred = window.OneSignalDeferred || [];
         OneSignalDeferred.push(async function(OneSignal) {
             await OneSignal.init({
-                appId: "a7d22c9a-4725-4f65-b48b-15d852ac76b7", // ⚠️ AQUÍ VA TU APP ID DE ONESIGNAL
-                notifyButton: { enable: false }, // Ocultamos el botón por defecto, usaremos el nuestro
+                appId: "a7d22c9a-4725-4f65-b48b-15d852ac76b7",
+                notifyButton: { enable: false },
             });
 
-            // Revisar si ya dio permiso antes
+            // Revisar si ya dio permiso antes y marcar el checkbox
             const permission = await OneSignal.Notifications.permission;
-            actualizarUINotificaciones(permission);
+            const checkNoti = document.getElementById('check-notificaciones');
+            if (permission === true) {
+                checkNoti.checked = true;
+            }
         });
 
-        // Función que se ejecuta al tocar la caja
-        async function pedirPermisoNotificaciones() {
-            const permission = await OneSignal.Notifications.requestPermission();
-            actualizarUINotificaciones(permission);
-        }
-
-        // Cambiar el diseño de la caja según la respuesta del cliente
-        function actualizarUINotificaciones(permission) {
-            const caja = document.getElementById('caja-notificaciones');
-            const estado = document.getElementById('estado-noti');
-
-            if (permission === true) {
-                caja.classList.add('activo');
-                estado.innerHTML = '✅';
-                caja.onclick = null; // Desactivar el clic
-            } else if (permission === false) {
-                caja.classList.add('denegado');
-                estado.innerHTML = '❌';
-                caja.querySelector('p').innerText = "Has bloqueado las notificaciones. Actívalas en los ajustes de tu navegador si cambias de opinión.";
-                caja.onclick = null;
+        // Lógica del Checkbox
+        document.getElementById('check-notificaciones').addEventListener('change', async (e) => {
+            const isChecked = e.target.checked;
+            
+            if (isChecked) {
+                // Si el usuario marca la casilla, pedimos permiso
+                const permission = await OneSignal.Notifications.requestPermission();
+                if (permission !== true) {
+                    // Si el usuario dice "Bloquear", desmarcamos la casilla
+                    e.target.checked = false;
+                    alert("Debes permitir las notificaciones en tu navegador para recibir ofertas.");
+                }
+            } else {
+                // Si el usuario desmarca la casilla, lo desuscribimos de OneSignal
+                OneSignal.User.PushSubscription.optOut();
             }
-        }
+        });
     </script>
 
     <!-- Script de Autenticación (Firebase) -->
@@ -132,7 +129,6 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // Elementos
         const errorBox = document.getElementById('mensaje-error');
         const passwordInput = document.getElementById('password');
         const toggleBtn = document.getElementById('toggle-password');
@@ -144,16 +140,13 @@
         const grupoPassword = document.getElementById('grupo-password');
         const btnGoogle = document.getElementById('btn-google');
         const divisorGoogle = document.getElementById('divisor-google');
-        const cajaNoti = document.getElementById('caja-notificaciones');
+        const cajaNoti = document.getElementById('caja-noti');
 
-        // Estado
         let modo = 'login';
 
-        // Ocultar errores al escribir
         document.getElementById('email').addEventListener('input', () => errorBox.style.display = 'none');
         passwordInput.addEventListener('input', () => errorBox.style.display = 'none');
 
-        // Ojito de la contraseña
         toggleBtn.addEventListener('click', () => {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -164,12 +157,10 @@
             }
         });
 
-        // Si ya está logueado, a la tienda
         onAuthStateChanged(auth, (user) => {
             if (user) window.location.href = "index.html";
         });
 
-        // Función para cambiar la vista
         function cambiarModo(nuevoModo) {
             modo = nuevoModo;
             errorBox.style.display = 'none';
@@ -185,7 +176,7 @@
                 btnGoogle.style.display = "flex";
                 divisorGoogle.style.display = "block";
                 linkForgot.style.display = "block";
-                cajaNoti.style.display = "flex"; // Mostrar caja en login
+                cajaNoti.style.display = "flex";
             }
             else if (modo === 'registro') {
                 titulo.innerText = "Crear Cuenta";
@@ -197,7 +188,7 @@
                 btnGoogle.style.display = "flex";
                 divisorGoogle.style.display = "block";
                 linkForgot.style.display = "none";
-                cajaNoti.style.display = "flex"; // Mostrar caja en registro
+                cajaNoti.style.display = "flex";
             }
             else if (modo === 'recuperacion') {
                 titulo.innerText = "Recuperar Contraseña";
@@ -208,24 +199,21 @@
                 passwordInput.required = false;
                 btnGoogle.style.display = "none";
                 divisorGoogle.style.display = "none";
-                cajaNoti.style.display = "none"; // Ocultar en recuperación
+                cajaNoti.style.display = "none";
             }
         }
 
-        // Botón de Login/Registro
         linkToggle.addEventListener('click', (e) => {
             e.preventDefault();
             if (modo === 'login') cambiarModo('registro');
             else cambiarModo('login');
         });
 
-        // Botón de Olvidé mi contraseña
         linkForgot.addEventListener('click', (e) => {
             e.preventDefault();
             cambiarModo('recuperacion');
         });
 
-        // Botón de Google
         btnGoogle.addEventListener('click', () => {
             signInWithPopup(auth, provider).catch(error => {
                 if (error.code !== 'auth/popup-closed-by-user') {
@@ -234,7 +222,6 @@
             });
         });
 
-        // Enviar Formulario
         document.getElementById('form-auth').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
